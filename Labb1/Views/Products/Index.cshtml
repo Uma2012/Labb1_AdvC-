@@ -4,63 +4,30 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Products</h1>
-
-
+<h1>All Products</h1>
 <form method="post">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.productName)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.id)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.color)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.publishDate)
-                </th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.productName)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.id)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.color)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.publishDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.price)
-                    </td>
+    @foreach (var item in Model)
+    {
 
+        <div class="col-lg-4 mb-5 d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+
+                <img class="card-img-top" src="@Url.Content("~/Images/" + item.photo)" alt="@item.productName" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.productName</h5>
+                    <p class="card-text">@item.price.ToString("C0")</p>
+                    <p class="card-text">Color: @item.color</p>
+                    <p class="card-text">@item.description</p>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <td>
-                            <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id" class="btn btn-success">Buy</button>
-                        </td>
+                        <button style="position:center" class="btn btn-dark" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id">Buy</button>
                     }
-                </tr>
-            }
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+
+    }
 </form>
+
+
 

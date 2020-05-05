@@ -5,7 +5,8 @@
     "description": "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
     "color": "Crimson",
     "publishDate": "2019-07-07T22:17:03Z",
-    "price": "200"
+    "price": "200",
+    "photo": "material_1.jpg"
   },
   {
     "productName": "SRX",
@@ -13,7 +14,8 @@
     "description": "Aenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.",
     "color": "Puce",
     "publishDate": "2018-11-18T20:47:39Z",
-    "price": "300"
+    "price": "300",
+    "photo": "material_2.jpg"
   },
   {
     "productName": "Prius",
@@ -21,7 +23,8 @@
     "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.",
     "color": "Yellow",
     "publishDate": "2018-11-25T23:46:34Z",
-    "price": "400"
+    "price": "400",
+    "photo": "material_3.jpg"
   },
   {
     "productName": "S60",
@@ -29,7 +32,8 @@
     "description": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
     "color": "Fuscia",
     "publishDate": "2019-04-20T06:23:45Z",
-    "price": "500"
+    "price": "500",
+    "photo": "material_4.jpg"
   },
   {
     "productName": "Ram Van B250",
@@ -37,7 +41,8 @@
     "description": "Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.",
     "color": "Pink",
     "publishDate": "2019-02-09T03:15:28Z",
-    "price": "600"
+    "price": "600",
+    "photo": "material_5.jpg"
   },
   {
     "productName": "GTI",
@@ -45,7 +50,8 @@
     "description": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.",
     "color": "Aquamarine",
     "publishDate": "2019-02-15T04:23:53Z",
-    "price": "250"
+    "price": "250",
+    "photo": "material_6.jpg"
   },
   {
     "productName": "CX-9",
@@ -53,7 +59,8 @@
     "description": "Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.",
     "color": "Khaki",
     "publishDate": "2018-11-17T14:10:38Z",
-    "price": "100"
+    "price": "100",
+    "photo": "material_7.jpg"
   },
   {
     "productName": "SL-Class",
@@ -61,7 +68,8 @@
     "description": "Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.\n\nSed ante. Vivamus tortor. Duis mattis egestas metus.",
     "color": "Maroon",
     "publishDate": "2019-02-18T11:33:36Z",
-    "price": "250"
+    "price": "250",
+    "photo": "material_8.jpg"
   },
   {
     "productName": "Expedition",
@@ -69,7 +77,8 @@
     "description": "Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.\n\nCurabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
     "color": "Purple",
     "publishDate": "2019-01-05T04:49:49Z",
-    "price": "350"
+    "price": "350",
+    "photo": "material_9.jpg"
   },
   {
     "productName": "Esprit",
@@ -77,8 +86,9 @@
     "description": "Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.",
     "color": "Goldenrod",
     "publishDate": "2019-05-12T11:31:57Z",
-    "price": "450"
-    }
+    "price": "450",
+    "photo": "material_10.jpg"
+  }
      // ,
     //{
     //  "productName": "LTD Crown Victoria",

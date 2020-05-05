@@ -54,7 +54,8 @@ namespace Labb1
                        color = x.color,
                        description = x.description,
                        productName = x.productName,
-                       price=x.price
+                       price=x.price,
+                       photo=x.photo
                    })
                    .FirstOrDefault();
             }
