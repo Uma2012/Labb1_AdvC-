@@ -10,9 +10,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>color</th>
-            <th>Description</th>
+            <th>Name</th>           
             <th>Pris</th>
             <th>Amount</th>
 
@@ -22,9 +20,7 @@
         @foreach (var item in Model.productlist)
         {
         <tr>
-            <td>@item.Product.productName</td>
-            <td>@item.Product.color</td>
-            <td>@item.Product.description</td>
+            <td>@item.Product.productName</td>           
             <td>@item.Product.price</td>
             <td>@item.Amount</td>
         </tr>
@@ -32,7 +28,7 @@
     </tbody>
 </table>
 <div style="float:right">
-    Total Price: @Model.TotalPrice
+    <h5> Total Price: @Model.TotalPrice</h5>
 </div>
 <div style="">
     <button class="btn btn-success">Order</button>
