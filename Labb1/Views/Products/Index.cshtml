@@ -6,6 +6,7 @@
 
 <h1>Products</h1>
 
+
 <form method="post">
     <table class="table">
         <thead>
@@ -14,8 +15,8 @@
                     @Html.DisplayNameFor(model => model.productName)
                 </th>
                 @*<th>
-                    @Html.DisplayNameFor(model => model.id)
-                </th>*@
+                        @Html.DisplayNameFor(model => model.id)
+                    </th>*@
                 <th>
                     @Html.DisplayNameFor(model => model.description)
                 </th>
@@ -31,34 +32,35 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.productName)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.id)
-        </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.publishDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.price)
-                </td>
-
-                @if (User.Identity.IsAuthenticated)
-                {
+                <tr>
                     <td>
-                        <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id" class="btn btn-success">Buy</button>
+                        @Html.DisplayFor(modelItem => item.productName)
                     </td>
-                }
-            </tr>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.publishDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.price)
+                    </td>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td>
+                            <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id" class="btn btn-success">Buy</button>
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>
 </form>
+
