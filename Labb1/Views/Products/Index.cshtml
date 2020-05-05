@@ -6,50 +6,59 @@
 
 <h1>Products</h1>
 
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.productName)
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.publishDate)
+                </th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.productName)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.publishDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.productName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.publishDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.productName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.publishDate)
-            </td>
-            <td>
-               <button class="btn btn-success">Buy</button>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <button asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id" class="btn btn-success">Buy</button>
+                    </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</form>

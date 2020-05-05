@@ -12,5 +12,6 @@ namespace Labb1
         public string description { get; set; }
         public string color { get; set; }
         public DateTime publishDate { get; set; }
+        public decimal price { get; set; }
     }
 }
