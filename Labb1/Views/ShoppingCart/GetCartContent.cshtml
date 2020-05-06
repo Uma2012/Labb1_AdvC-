@@ -5,45 +5,46 @@
 }
 
 <h1>GetCartContent</h1>
-@if (Model.productlist!=null && Model.TotalPrice>0)
+@if (Model.productlist != null && Model.TotalPrice > 0)
 {
+    @Html.HiddenFor(x => x.productlist)
 
-<form method="post" asp-action="CreateOrder" asp-controller="Order">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Pris</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-                @Html.HiddenFor(x => x.productlist)
-            
-            @foreach (var item in Model.productlist)
-            {
-                
+    <form method="post" asp-action="CreateOrder" asp-controller="Order">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@item.Product.productName</td>
-                    <td>@item.Product.price</td>
-                    <td>@item.Amount</td>
+                    <th>Name</th>
+                    <th>Pris</th>
+                    <th>Amount</th>
                 </tr>
+            </thead>
+            <tbody>
 
-            }
+                @*@Html.HiddenFor(x => x.productlist)*@
 
-        </tbody>
-    </table>
-    <div style="float:right" id="totalprice" asp-for="TotalPrice">
-        <h5> Total Price: @Model.TotalPrice</h5>
-        @Html.HiddenFor(x => x.TotalPrice)
-    </div>
-    <div>
-        <button class="btn btn-success" asp-action="CreateOrder" asp-controller="Order" type="submit">Order</button>
-    </div>
-    
+                @foreach (var item in Model.productlist)
+                {
 
-</form>
+                    <tr>
+                        <td>@item.Product.productName</td>
+                        <td>@item.Product.price</td>
+                        <td>@item.Amount</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+        <div style="float:right" asp-for="TotalPrice">
+            <h5> Total Price: @Model.TotalPrice</h5>
+            @Html.HiddenFor(x => x.TotalPrice)
+        </div>
+        <div>
+            <button class="btn btn-success" asp-action="CreateOrder" asp-controller="Order" type="submit">Order</button>
+        </div>
+
+
+    </form>
 }
 else
 {

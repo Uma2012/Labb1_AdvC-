@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Labb1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,11 +22,43 @@ namespace Labb1.Controllers
             this._cartName = config["CartSessionCookie:Name"];
             this._productRepository = productRepository;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
        
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult AddToCart(Guid productid)
+        {
+
+            var currentCartItems = HttpContext.Session.Get<List<CartItem>>(_cartName);
+            List<CartItem> cartItem = new List<CartItem>();
+
+            if (currentCartItems != null)
+            {
+                cartItem = currentCartItems;
+            }
+
+            if (currentCartItems != null && currentCartItems.Any(x => x.Product.id == productid))
+            {
+                int productindex = currentCartItems.FindIndex(x => x.Product.id == productid);
+                currentCartItems[productindex].Amount += 1;
+                cartItem = currentCartItems;
+            }
+            else
+            {
+                var product = _productRepository.GetProductById(productid);
+                CartItem newItem = new CartItem()
+                {
+                    Product = product,
+                    Amount = 1
+
+                };
+                cartItem.Add(newItem);
+            }
+
+            HttpContext.Session.Set(_cartName, cartItem);
+
+            return RedirectToAction("Index", "Products");
+        }
 
         public IActionResult GetCartContent()
         {
@@ -41,42 +74,6 @@ namespace Labb1.Controllers
            
             return View(shoppingCart);
         }
-        [HttpPost]
-        public IActionResult AddToCart(Guid productid)
-        {        
-        
-            var currentCartItems = HttpContext.Session.Get<List<CartItem>>(_cartName);
-            List<CartItem> cartItem = new List<CartItem>();
-
-            if(currentCartItems!=null)
-            {
-                cartItem = currentCartItems;
-            }
-
-            if(currentCartItems!=null && currentCartItems.Any(x=>x.Product.id==productid))
-            {
-                int productindex = currentCartItems.FindIndex(x => x.Product.id == productid);
-                currentCartItems[productindex].Amount += 1;
-                cartItem = currentCartItems;
-            }
-            else
-            {
-                var product = _productRepository.GetProductById(productid);
-                CartItem newItem = new CartItem()
-                {
-                    Product = product,
-                    Amount=1
-
-                };
-                cartItem.Add(newItem);
-            }         
-
-
-            HttpContext.Session.Set<List<CartItem>>(_cartName, cartItem);
-
-            return RedirectToAction("Index", "Products");
-        }
-
 
     }
 
