@@ -25,31 +25,7 @@ namespace Labb1.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult AddToCart(Guid productid)
-        //{            
-        //    string cartContent = "";                  
-
-
-        //    var cart = HttpContext.Session.GetString(_cartName);
-        //    if (string.IsNullOrEmpty(cart))
-        //    {
-        //        cartContent += productid;               
-
-        //    }
-        //    else
-        //    {
-        //        cartContent = cart;
-        //        cartContent += "," + productid;
-
-        //    }
-
-
-        //    HttpContext.Session.SetString(_cartName, cartContent);
-
-        //    return RedirectToAction("Index", "Products");
-        //}
-
+       
 
         public IActionResult GetCartContent()
         {
@@ -59,6 +35,7 @@ namespace Labb1.Controllers
 
             ShoppingCart shoppingCart = new ShoppingCart();
             shoppingCart.productlist = cart;
+            if(cart!=null)            
 
            shoppingCart.TotalPrice = shoppingCart.productlist.Sum(x => x.Product.price * x.Amount);
            

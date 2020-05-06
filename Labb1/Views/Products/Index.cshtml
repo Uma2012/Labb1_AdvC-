@@ -13,17 +13,21 @@
 
                 <div class="col-lg-4 mb-5 d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
-
-                        <img class="card-img-top" src="@Url.Content("~/Images/" + item.photo)" alt="@item.productName" />
-                        <div class="card-body">
+                        @*<a asp-action="ProductDetails" asp-controller="Product" asp-route-productid="@item.id">*@
+                        <img class="card-img-top" style="height:200px;" src="@Url.Content("~/Images/" + item.photo)" alt="@item.productName" />
+                      
+                        <div class="card-body col text-center">
                             <h5 class="card-title">@item.productName</h5>
                             <p class="card-text">@item.price.ToString("C0")</p>
-                            <p class="card-text"><b>Color: </b> @item.color</p>
-                            <p class="card-text">@item.description</p>
-                            <div class="col text-center">
+                           
+                            <a asp-action="ProductDetails" asp-controller="Products" asp-route-productid="@item.id" >View Details</a>
+                            <br />
+                            <br />
+                            <div>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <button  class="btn btn-dark" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id">Buy</button>
+                                    @*<button class="btn btn-dark" id="item_added_to_cart" onclick="DisplayResponseMessage(@item.productName)" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id">Buy</button>*@
+                                    <button class="btn btn-dark" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id">Buy</button>
                                 }
                             </div>
                         </div>

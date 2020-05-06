@@ -1,0 +1,31 @@
+﻿@model Products
+@{
+    ViewData["Title"] = "ProductDetails";
+}
+
+<h1>ProductDetails</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 d-flex justify-content-center align-items-center overflow-hidden rounded">
+            @*<div style="max-width: 375px;height:200px;  overflow: hidden;" class="rounded">*@
+            <div style="width:auto; height:400px">
+                <img src="@Url.Content("~/Images/" + Model.photo)" class="rounded shadow" id="detail_image" alt="@Model.productName">
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 pl-sm-4">
+            <div class="container">
+                <h2>@Model.productName</h2>
+                <p><b>Color:</b> @Model.color</p>
+                <p><b>Description:</b> @Model.description</p>
+                <h4><b>Price:</b> @Model.price.ToString("C0")</h4>
+                <button onclick="history.back()" class="btn btn-dark " style="width:auto;position:center;">Back</button>
+               
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+

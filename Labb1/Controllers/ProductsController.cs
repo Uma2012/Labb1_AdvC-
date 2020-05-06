@@ -9,16 +9,23 @@ namespace Labb1.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly IProductRepository productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductsController(IProductRepository productRepository)
         {
-            this.productRepository = productRepository;
+            this._productRepository = productRepository;
         }
         public ActionResult<List<Products>> Index()
         {
-          List<Products> products=  productRepository.GetAll();
+          List<Products> products=  _productRepository.GetAll();
             return View(products);
+        }
+
+       
+        public IActionResult ProductDetails(Guid productid)
+        {
+            Products product = _productRepository.GetProductById(productid);
+            return View(product);
         }
     }
 }
