@@ -50,7 +50,6 @@ namespace Labb1.Controllers
                 {
                     Product = product,
                     Amount = 1
-
                 };
                 cartItem.Add(newItem);
             }
@@ -59,9 +58,22 @@ namespace Labb1.Controllers
 
             return RedirectToAction("Index", "Products");
         }
-        public IActionResult DeleteAnItem(int productid)
+
+        [Route("[controller]/DeleteAnItem/{id}")]
+        public IActionResult DeleteAnItem(Guid id)
         {
-            return View();
+            
+            var currentCartItems = HttpContext.Session.Get<List<CartItem>>(_cartName);
+            List<CartItem> cartItem = new List<CartItem>();
+            if (currentCartItems != null && currentCartItems.Any(x => x.Product.id == id))
+            {
+                int productindex = currentCartItems.FindIndex(x => x.Product.id == id);
+                currentCartItems.RemoveAt(productindex);                
+                cartItem = currentCartItems;
+            }
+            HttpContext.Session.Set(_cartName, cartItem);
+
+            return RedirectToAction("GetCartContent", "ShoppingCart");
         }
 
         public IActionResult GetCartContent()

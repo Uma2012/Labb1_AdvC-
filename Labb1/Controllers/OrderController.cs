@@ -35,8 +35,10 @@ namespace Labb1.Controllers
                 OrderDate = DateTime.Now,
                 TotalItems=totalitems,
                 TotalPrice=totalprice
+               
             };
 
+            //Clear the session cookies once the order is created
             if (HttpContext.Session.GetString(_cartName) != null)
                 HttpContext.Session.Remove(_cartName);
             return View(order);

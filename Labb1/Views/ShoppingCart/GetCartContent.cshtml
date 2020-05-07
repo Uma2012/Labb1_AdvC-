@@ -6,8 +6,7 @@
 
 <h1>GetCartContent</h1>
 @if (Model.productlist != null && Model.TotalPrice > 0)
-{
-    @Html.HiddenFor(x => x.productlist)
+{   
 
 <form method="post" asp-action="CreateOrder" asp-controller="Order">
     <table class="table">
@@ -16,6 +15,7 @@
                 <th>Name</th>
                 <th>Pris</th>
                 <th>Amount</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -34,25 +34,12 @@
                     @Html.DisplayFor(x => x.productlist[i].Amount)
                     @Html.HiddenFor(x => x.productlist[i].Amount)
                 </td>
-                <td>
-                    @Html.ActionLink("Delete","DeleteAnItem","ShoppingCart", new { Model.productlist[i].Product.id})
+                <td>         
+                    <button class="btn btn-danger" type="submit" asp-controller="ShoppingCart" asp-action="DeleteAnItem" asp-route-id="@Model.productlist[i].Product.id">Delete</button>
+                    @*@Html.ActionLink("Delete", "DeleteAnItem", "ShoppingCart", new { id = Model.productlist[i].Product.id }, null)*@
                 </td>
             </tr>
             }
-
-
-            @*@foreach (var item in Model.productlist)
-            {
-                
-                <tr>
-                    <td>
-                    @item.Product.productName</td>
-                    <td>@item.Product.price</td>
-                    <td>@item.Amount</td>
-                </tr>
-
-            }*@
-
         </tbody>
     </table>
     <div style="float:right" id="totalprice" asp-for="TotalPrice">
@@ -61,8 +48,7 @@
     </div>
     <div>
         <button class="btn btn-dark" asp-action="CreateOrder" asp-controller="Order" type="submit">Order</button>
-    </div>
-    
+    </div>    
 
     </form>
 }
