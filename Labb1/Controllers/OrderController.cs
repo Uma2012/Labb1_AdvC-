@@ -9,32 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Labb1.Controllers
 {
     public class OrderController : Controller
-    {
-        //[HttpPost]
-        //public IActionResult CreateOrder([FromForm]ShoppingCart form)
-        //{
-
-        //    // decimal totalprice=Convert.ToDecimal(form["totalprice"]);
-        //    decimal totalprice = form.TotalPrice;
-
-        //    return View();
-        //}
-
-        [HttpPost]
-        //public IActionResult CreateOrder(IFormCollection form)
-        //{
-
-        //    decimal totalprice = Convert.ToDecimal(form["totalprice"]);
-        //    var productList = form["productlist"];
-        //    foreach(var item in productList)
-        //    {
-        //       var a= item;
-        //    }
-
-
-        //    return View();
-        //}
-
+    {     
 
         [HttpPost]
         public IActionResult CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
@@ -49,7 +24,6 @@ namespace Labb1.Controllers
             }
             Order order = new Order()
             {
-
                 OrderId = oriderid,
                 OrderDate = DateTime.Now,
                 TotalItems=totalitems,

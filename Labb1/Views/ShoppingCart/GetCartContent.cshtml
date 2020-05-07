@@ -34,7 +34,7 @@
                     @Html.HiddenFor(x => x.productlist[i].Amount)
                 </td>
                 <td>
-                    @Html.ActionLink("Delete","DeleteAnItem","ShoppingCart")
+                    @Html.ActionLink("Delete","DeleteAnItem","ShoppingCart", new { Model.productlist[i].Product.id})
                 </td>
             </tr>
             }
