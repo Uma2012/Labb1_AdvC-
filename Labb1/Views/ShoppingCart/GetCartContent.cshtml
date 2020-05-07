@@ -53,16 +53,16 @@
 
             }*@
 
-            </tbody>
-        </table>
-        <div style="float:right" asp-for="TotalPrice">
-            <h5> Total Price: @Model.TotalPrice</h5>
-            @Html.HiddenFor(x => x.TotalPrice)
-        </div>
-        <div>
-            <button class="btn btn-success" asp-action="CreateOrder" asp-controller="Order" type="submit">Order</button>
-        </div>
-
+        </tbody>
+    </table>
+    <div style="float:right" id="totalprice" asp-for="TotalPrice">
+        <h5> Total Price: @Model.TotalPrice</h5>
+        @Html.HiddenFor(x => x.TotalPrice)
+    </div>
+    <div>
+        <button class="btn btn-dark" asp-action="CreateOrder" asp-controller="Order" type="submit">Order</button>
+    </div>
+    
 
     </form>
 }
