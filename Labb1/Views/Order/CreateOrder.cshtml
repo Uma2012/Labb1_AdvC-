@@ -1,7 +1,42 @@
-﻿
+﻿@model Labb1.Models.Order
+
 @{
     ViewData["Title"] = "CreateOrder";
 }
 
 <h1>CreateOrder</h1>
 
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalPrice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TotalItems)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TotalItems)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+    </dl>
+</div>
+<div>
+   
+    <a asp-action="Index" asp-controller="Products" class="btn btn-dark" >Back</a>
+</div>

@@ -11,37 +11,7 @@ using Microsoft.Extensions.Configuration;
 namespace Labb1.Controllers
 {
     public class OrderController : Controller
-    {
-        private readonly string _cartName;
-        private readonly IProductRepository _productRepository;
-        public OrderController(IProductRepository productRepository, IConfiguration config)
-        {
-            this._cartName = config["CartSessionCookie:Name"];
-            this._productRepository = productRepository;
-        }
-       
-
-        //[HttpPost]
-        //public IActionResult CreateOrder(IFormCollection form)
-        //{
-        //    Guid orderid = Guid.NewGuid();
-        //    var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
-        //    decimal totalprice = Convert.ToDecimal(form["Totalprice"]);
-        //    Order order = new Order()
-        //    {
-        //        OrderId = orderid,
-        //        TotalPrice = totalprice,
-        //        OrderDate = DateTime.Now,
-        //        ProductsList=cart
-        //    };           
-            
-
-            //ShoppingCart shoppingCart = new ShoppingCart();
-            //shoppingCart.productlist = cart;
-            
-
-           // shoppingCart.TotalPrice = totalprice;
-
+    {     
 
         [HttpPost]
         public IActionResult CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
@@ -56,7 +26,6 @@ namespace Labb1.Controllers
             }
             Order order = new Order()
             {
-
                 OrderId = oriderid,
                 OrderDate = DateTime.Now,
                 TotalItems=totalitems,
@@ -64,17 +33,5 @@ namespace Labb1.Controllers
             };
             return View(order);
         }
-
-
-        //[HttpPost]
-        //public IActionResult CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
-        //{
-
-
-        //    decimal totalprice = form.TotalPrice;
-        //    var productlist = form.productlist;
-
-        //    return View();
-        //}
     }
 }
