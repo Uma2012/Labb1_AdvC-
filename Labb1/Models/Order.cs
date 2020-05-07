@@ -11,5 +11,6 @@ namespace Labb1.Models
         public List<Products> ProductsList { get; set; }
         public decimal TotalPrice { get; set; }
         public int TotalItems { get; set; }
+        public DateTime OrderDate { get; set; }
     }
 }

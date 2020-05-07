@@ -18,19 +18,39 @@
             </tr>
         </thead>
         <tbody>
-            
-                @Html.HiddenFor(x => x.productlist)
-            
-            @foreach (var item in Model.productlist)
+            @for(int i=0;i<Model.productlist.Count;i++)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x=>x.productlist[i].Product.productName)
+                    @Html.HiddenFor(x=>x.productlist[i].Product.productName)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => x.productlist[i].Product.price)
+                    @Html.HiddenFor(x =>  x.productlist[i].Product.price)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => x.productlist[i].Amount)
+                    @Html.HiddenFor(x => x.productlist[i].Amount)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete","DeleteAnItem","ShoppingCart")
+                </td>
+            </tr>
+            }
+
+
+            @*@foreach (var item in Model.productlist)
             {
                 
                 <tr>
-                    <td>@item.Product.productName</td>
+                    <td>
+                    @item.Product.productName</td>
                     <td>@item.Product.price</td>
                     <td>@item.Amount</td>
                 </tr>
 
-            }
+            }*@
 
         </tbody>
     </table>
