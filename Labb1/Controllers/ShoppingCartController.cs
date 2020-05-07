@@ -59,6 +59,10 @@ namespace Labb1.Controllers
 
             return RedirectToAction("Index", "Products");
         }
+        public IActionResult DeleteAnItem(int productid)
+        {
+            return View();
+        }
 
         public IActionResult GetCartContent()
         {
