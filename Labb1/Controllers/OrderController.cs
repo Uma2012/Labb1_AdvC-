@@ -21,19 +21,19 @@ namespace Labb1.Controllers
         }
        
 
-        [HttpPost]
-        public IActionResult CreateOrder(IFormCollection form)
-        {
-            Guid orderid = Guid.NewGuid();
-            var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
-            decimal totalprice = Convert.ToDecimal(form["Totalprice"]);
-            Order order = new Order()
-            {
-                OrderId = orderid,
-                TotalPrice = totalprice,
-                OrderDate = DateTime.Now,
-                ProductsList=cart
-            };           
+        //[HttpPost]
+        //public IActionResult CreateOrder(IFormCollection form)
+        //{
+        //    Guid orderid = Guid.NewGuid();
+        //    var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
+        //    decimal totalprice = Convert.ToDecimal(form["Totalprice"]);
+        //    Order order = new Order()
+        //    {
+        //        OrderId = orderid,
+        //        TotalPrice = totalprice,
+        //        OrderDate = DateTime.Now,
+        //        ProductsList=cart
+        //    };           
             
 
             //ShoppingCart shoppingCart = new ShoppingCart();
