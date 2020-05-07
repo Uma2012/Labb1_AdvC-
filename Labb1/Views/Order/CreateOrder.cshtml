@@ -4,11 +4,14 @@
     ViewData["Title"] = "CreateOrder";
 }
 
-<h1>CreateOrder</h1>
+
 
 <div>
-    <h4>Order</h4>
-    <hr />
+    <div class="alert alert-secondary" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p>Your order is Successfully created.Thank you for shopping with us!</p>       
+    </div>
+   
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.OrderId)
