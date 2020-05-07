@@ -11,7 +11,12 @@ using Microsoft.Extensions.Configuration;
 namespace Labb1.Controllers
 {
     public class OrderController : Controller
-    {     
+    {
+        private readonly string _cartName;
+        public OrderController(IConfiguration config)
+        {
+            this._cartName = config["CartSessionCookie:Name"];
+        }
 
         [HttpPost]
         public IActionResult CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
@@ -31,6 +36,9 @@ namespace Labb1.Controllers
                 TotalItems=totalitems,
                 TotalPrice=totalprice
             };
+
+            if (HttpContext.Session.GetString(_cartName) != null)
+                HttpContext.Session.Remove(_cartName);
             return View(order);
         }
     }

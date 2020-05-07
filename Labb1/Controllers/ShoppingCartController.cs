@@ -75,8 +75,14 @@ namespace Labb1.Controllers
             if(cart!=null)            
 
            shoppingCart.TotalPrice = shoppingCart.productlist.Sum(x => x.Product.price * x.Amount);
+            
            
             return View(shoppingCart);
+        }
+
+        public IActionResult UpdateCart()
+        {
+            return View();
         }
 
     }
