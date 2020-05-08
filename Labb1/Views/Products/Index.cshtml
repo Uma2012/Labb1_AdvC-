@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<Labb1.Products>
-
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
 
 @{
     ViewData["Title"] = "Index";
@@ -28,9 +34,8 @@
                             <div>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    @*<button class="btn btn-dark" id="item_added_to_cart" onclick="DisplayResponseMessage('@item.productName')">Buy</button>*@
-                                    <input class="btn btn-dark" type="button" id="item_added_to_cart" value="Buy" onClick="DisplayResponseMessage('@item.productName')" />
-                                    @*<button class="btn btn-dark" asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-productid="@item.id">Buy</button>*@
+                                    <input class="btn btn-dark" type="button"  value="Buy" onClick="addtocart('@item.id','@item.productName')" />
+                                   
                                 }
                             </div>
                         </div>
@@ -38,8 +43,10 @@
                 </div>
 
             }
-         
+
         </div>
+        <div style="display: none" id="AntiForgeryToken">@GetAntiXsrfRequestToken()</div>
+
     </div>
 </form>
 

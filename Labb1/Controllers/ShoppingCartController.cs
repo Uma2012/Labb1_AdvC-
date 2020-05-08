@@ -22,8 +22,8 @@ namespace Labb1.Controllers
             this._cartName = config["CartSessionCookie:Name"];
             this._productRepository = productRepository;
         }
-       
 
+        [ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
         public IActionResult AddToCart(Guid productid)
