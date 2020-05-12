@@ -34,8 +34,8 @@
                             <div>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <input class="btn btn-dark" type="button"  value="Buy" onClick="addtocart('@item.id','@item.productName')" />
-                                   
+                                    <input class="btn btn-dark" type="button" value="Buy" onClick="addtocart('@item.id','@item.productName')" />
+
                                 }
                             </div>
                         </div>
@@ -43,6 +43,7 @@
                 </div>
 
             }
+            <a href="D:\Uma\Study\Advanced C#\Labbs\Labb1\Labb1\Views\ShoppingCart\GetCartContent.cshtml">D:\Uma\Study\Advanced C#\Labbs\Labb1\Labb1\Views\ShoppingCart\GetCartContent.cshtml</a>
 
         </div>
         <div style="display: none" id="AntiForgeryToken">@GetAntiXsrfRequestToken()</div>

@@ -13,9 +13,11 @@ namespace Labb1.Controllers
     public class OrderController : Controller
     {
         private readonly string _cartName;
-        public OrderController(IConfiguration config)
+        private readonly UserManager<IdentityUser> _userManager;
+        public OrderController(IConfiguration config,UserManager<IdentityUser> userManager)
         {
             this._cartName = config["CartSessionCookie:Name"];
+            this._userManager = userManager;
         }
 
         [HttpPost]
@@ -28,13 +30,16 @@ namespace Labb1.Controllers
             foreach(var item in productlist)
             {
                totalitems+= item.Amount;
+               
             }
             Order order = new Order()
             {
                 OrderId = oriderid,
                 OrderDate = DateTime.Now,
-                TotalItems=totalitems,
-                TotalPrice=totalprice
+                TotalItems = totalitems,
+                TotalPrice = totalprice,
+                UserId =Guid.Parse( _userManager.GetUserId(User)),
+                ProductsList=form.productlist
                
             };
 
