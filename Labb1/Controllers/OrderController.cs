@@ -13,8 +13,8 @@ namespace Labb1.Controllers
     public class OrderController : Controller
     {
         private readonly string _cartName;
-        private readonly UserManager<IdentityUser> _userManager;
-        public OrderController(IConfiguration config,UserManager<IdentityUser> userManager)
+        private readonly UserManager<User> _userManager;
+        public OrderController(IConfiguration config,UserManager<User> userManager)
         {
             this._cartName = config["CartSessionCookie:Name"];
             this._userManager = userManager;
