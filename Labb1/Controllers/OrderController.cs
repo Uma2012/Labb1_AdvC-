@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Labb1.Models;
+using Labb1.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,8 +22,9 @@ namespace Labb1.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
+        public async Task<IActionResult> CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
         {
+            OrderViewModel vm = new OrderViewModel();
             Guid oriderid = Guid.NewGuid();
             int totalitems=0;
             decimal totalprice = form.TotalPrice;
@@ -43,10 +45,13 @@ namespace Labb1.Controllers
                
             };
 
+            User user = await _userManager.GetUserAsync(User);
+            vm.User = user;
+            vm.Order = order;
             //Clear the session cookies once the order is created
             if (HttpContext.Session.GetString(_cartName) != null)
                 HttpContext.Session.Remove(_cartName);
-            return View(order);
+            return View(vm);
         }
     }
 }

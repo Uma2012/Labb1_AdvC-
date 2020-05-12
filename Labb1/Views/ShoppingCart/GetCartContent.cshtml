@@ -9,8 +9,8 @@
 {   
 
 <form method="post" asp-action="CreateOrder" asp-controller="Order">
-    <table class="table">
-        <thead>
+    <table class="table table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th>Name</th>
                 <th>Pris</th>
@@ -36,7 +36,6 @@
                 </td>
                 <td>         
                     <button class="btn btn-danger" type="submit" asp-controller="ShoppingCart" asp-action="DeleteAnItem" asp-route-id="@Model.productlist[i].Product.id">Delete</button>
-                    @*@Html.ActionLink("Delete", "DeleteAnItem", "ShoppingCart", new { id = Model.productlist[i].Product.id }, null)*@
                 </td>
             </tr>
             }

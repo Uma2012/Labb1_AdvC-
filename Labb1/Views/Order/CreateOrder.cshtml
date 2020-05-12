@@ -1,4 +1,4 @@
-﻿@model Labb1.Models.Order
+﻿@model Labb1.ViewModels.OrderViewModel
 
 @{
     ViewData["Title"] = "CreateOrder";
@@ -6,76 +6,190 @@
 
 
 
-   
-        <div class="alert alert-secondary" role="alert">
-            <h4 class="alert-heading">Well done!</h4>
-            <p>Your order is Successfully created.Thank you for shopping with us!</p>
-        </div>
-        <div>
-            <h5><u>Order Details</u></h5>
-            <br />
-            <dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.OrderId)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.OrderId)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.TotalPrice)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.TotalPrice)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.TotalItems)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.TotalItems)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.OrderDate)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.OrderDate)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.UserId)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.UserId)
-                </dd>
-            </dl>
 
-        <h5><u>Shopped items</u></h5>
-            <br />
-        <div>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.ProductsList)
-                        {
-                            <tr>
-                                <td>@item.Product.productName</td>
-                                <td>@item.Product.price</td>
-                                <td>@item.Amount</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+<div class="alert alert-secondary m-3" role="alert">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>Your order is Successfully created.Thank you for shopping with us!</p>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow m-3">
+
+            <div class="card-body">
+                <div>
+                    <h5>Order Details</h5>
+                    <br />
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Order.OrderId)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Order.OrderId)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Order.TotalPrice)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Order.TotalPrice)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Order.TotalItems)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Order.TotalItems)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Order.OrderDate)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Order.OrderDate)
+                        </dd>
+
+                    </dl>
+                </div>
             </div>
         </div>
+
+
+    </div>
+    <div class="col-lg-4">
+        <div class="card shadow m-3">
+            <div class="card-body">
+                <div>
+                    <h5>Delivery Address</h5>
+                    <br />
+                    <div>
+                        @Html.DisplayFor(model => model.User.FirstName)
+                        @Html.DisplayFor(model => model.User.LastName)
+                    </div>
+                    <div>
+                        <div>@Html.DisplayFor(model => model.User.StreetAddress)</div>
+                        <div>@Html.DisplayFor(model => model.User.City)</div>
+                        <div>@Html.DisplayFor(model => model.User.Postnumber)</div>
+                        <div>@Html.DisplayFor(model => model.User.Country)</div>
+                    </div>
+                    <div>
+                        @Html.DisplayNameFor(model => model.User.PhoneNumber):
+                        @Html.DisplayFor(model => model.User.PhoneNumber)
+                    </div>
+                </div>
+
             </div>
-    
-<div class="text-center">   
-    <a asp-action="Index" asp-controller="Products" class="btn btn-dark" >Back</a>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow m-3">
+            <div class="card-body">
+                <div>
+                    <h5>Shopped items</h5>
+                    <br />
+
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Order.ProductsList)
+                            {
+                                <tr>
+                                    <td>@item.Product.productName</td>
+                                    <td>@item.Product.price</td>
+                                    <td>@item.Amount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br />
+
+<div class="text-center">
+    <a asp-action="Index" asp-controller="Products" class="btn btn-dark">Back</a>
 </div>
 <br />
 <br />
+
+
+
+
+
+
+@*
+            <div>
+                <h5><u>Order Details</u></h5>
+                <br />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Order.OrderId)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Order.OrderId)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Order.TotalPrice)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Order.TotalPrice)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Order.TotalItems)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Order.TotalItems)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Order.OrderDate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Order.OrderDate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Order.UserId)
+                    </dt>
+
+                </dl>
+            </div>
+            <h5><u>Shopped items</u></h5>
+                <br />
+            <div>
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Order.ProductsList)
+                            {
+                                <tr>
+                                    <td>@item.Product.productName</td>
+                                    <td>@item.Product.price</td>
+                                    <td>@item.Amount</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+    <div class="text-center">
+        <a asp-action="Index" asp-controller="Products" class="btn btn-dark" >Back</a>
+    </div>
+    <br />
+    <br />*@
