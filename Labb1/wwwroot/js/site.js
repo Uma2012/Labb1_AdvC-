@@ -14,10 +14,30 @@ function DisplayResponseMessage(productName) {
     $('#exampleModalCenter').modal('show');
 }
 
+function updatecartamount() {
+    console.log("Update cart button");
+
+    // Get cart content using an AJAX call to GetCartContent() actionmethod
+    fetch('https://localhost:44364/ShoppingCart/UpdateCart')
+
+        // Get response as Json data
+        .then((response) => {
+            return response.json();
+        })
+
+        // Update cart button with totalItems by manipulating DOM
+        .then((data) => {
+
+            document.getElementById('cart-amount').innerHTML = data.totalitems;
+           
+        });
+
+
+}
 
 
 function addtocart(productid, name) {
-    console.log(name, productid);
+   // console.log(name, productid);
     
     let formData = new FormData();
 
@@ -41,6 +61,10 @@ function addtocart(productid, name) {
    
   
 }
+
+//$(document).ready(function () {
+//    updatecartamount();
+//})
 
 function GetAntiForgerytoken() {
     return document.getElementById('AntiForgeryToken').innerHTML;
