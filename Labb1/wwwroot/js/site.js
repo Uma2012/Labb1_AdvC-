@@ -5,7 +5,7 @@
 
 
 function DisplayResponseMessage(productName) {
-    console.log(productName);
+    //console.log("productname: "productName);
     // If productName is null, stop here! Dont show any message
     if (productName == null)
         alert("Something went wrong!");
@@ -16,9 +16,14 @@ function DisplayResponseMessage(productName) {
 
 function updatecartamount() {
     console.log("Update cart button");
+    let formData = new FormData();
+    formData.append("__RequestVerificationToken", GetAntiForgerytoken());
 
     // Get cart content using an AJAX call to GetCartContent() actionmethod
-    fetch('https://localhost:44364/ShoppingCart/UpdateCart')
+    fetch('https://localhost:44333/ShoppingCart/UpdateCart', {
+        method: "Post",
+        body: formData
+    })
 
         // Get response as Json data
         .then((response) => {
@@ -27,8 +32,8 @@ function updatecartamount() {
 
         // Update cart button with totalItems by manipulating DOM
         .then((data) => {
-
-            document.getElementById('cart-amount').innerHTML = data.totalitems;
+            console.log("data: ", data)
+           document.getElementById('cart-amount').innerHTML = data;
            
         });
 
@@ -51,6 +56,7 @@ function addtocart(productid, name) {
     })
         .then((response) => {
             if (response.ok) {
+                updatecartamount();
                 DisplayResponseMessage(name);
             }
             else {
@@ -62,10 +68,12 @@ function addtocart(productid, name) {
   
 }
 
-//$(document).ready(function () {
-//    updatecartamount();
-//})
+$(document).ready(function () {
+    updatecartamount();
+})
 
 function GetAntiForgerytoken() {
     return document.getElementById('AntiForgeryToken').innerHTML;
 }
+
+//window.onload = (event) => { updatecartamount() };

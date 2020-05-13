@@ -95,9 +95,9 @@ namespace Labb1.Controllers
         public JsonResult UpdateCart()
         {
             var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
-            int totalitems=0;
+            int? totalitems=0;
             if (cart == null)
-                return new JsonResult(totalitems);
+                return new JsonResult(null);
             else            
                totalitems = cart.Sum(x => x.Amount);           
            
