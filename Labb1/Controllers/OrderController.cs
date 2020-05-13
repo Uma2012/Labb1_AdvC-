@@ -21,6 +21,9 @@ namespace Labb1.Controllers
             this._userManager = userManager;
         }
 
+        //This mtd calculate total number of products in the session
+        //Creats order
+        //Get the User information
         [HttpPost]
         public async Task<IActionResult> CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
         {
@@ -31,8 +34,7 @@ namespace Labb1.Controllers
             var productlist = form.productlist;
             foreach(var item in productlist)
             {
-               totalitems+= item.Amount;
-               
+               totalitems+= item.Amount;               
             }
             Order order = new Order()
             {
@@ -44,13 +46,14 @@ namespace Labb1.Controllers
                 ProductsList=form.productlist
                
             };
-
             User user = await _userManager.GetUserAsync(User);
             vm.User = user;
             vm.Order = order;
+
             //Clear the session cookies once the order is created
             if (HttpContext.Session.GetString(_cartName) != null)
                 HttpContext.Session.Remove(_cartName);
+
             return View(vm);
         }
     }

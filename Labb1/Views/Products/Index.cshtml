@@ -34,7 +34,9 @@
                             <div>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <input class="btn btn-dark" type="button" value="Buy" onClick="addtocart('@item.id','@item.productName')" />
+                                    @*<input class="btn btn-dark" type="button" value="Buy" onClick="addtocart('@item.id','@item.productName')" />*@
+                                    <input class="btn btn-dark" type="submit" value="Buy" asp-route-productid="@item.id" asp-action="AddToCart" asp-controller="Shoppingcart" />
+
 
                                 }
                             </div>
@@ -43,7 +45,6 @@
                 </div>
 
             }
-            <a href="D:\Uma\Study\Advanced C#\Labbs\Labb1\Labb1\Views\ShoppingCart\GetCartContent.cshtml">D:\Uma\Study\Advanced C#\Labbs\Labb1\Labb1\Views\ShoppingCart\GetCartContent.cshtml</a>
 
         </div>
         <div style="display: none" id="AntiForgeryToken">@GetAntiXsrfRequestToken()</div>
