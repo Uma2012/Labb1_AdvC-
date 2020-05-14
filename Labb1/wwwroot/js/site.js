@@ -7,13 +7,14 @@
 
 
 function addtocart(productid, name) {
-    // console.log(name, productid);
+    console.log(name, productid);
 
     let formData = new FormData();
 
     // Append form data
     formData.append("productid", productid);
     formData.append("__RequestVerificationToken", GetAntiForgerytoken());
+
     fetch("https://localhost:44333/ShoppingCart/AddToCart", {
         method: "Post",
         body: formData
@@ -25,7 +26,7 @@ function addtocart(productid, name) {
                 DisplayResponseMessage(name);
             }
             else {
-                alert("Something went wrong!");
+                alert("Something went wrong in addtocart!");
             }
 
         });

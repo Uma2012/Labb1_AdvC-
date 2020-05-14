@@ -25,7 +25,7 @@ namespace Labb1.Controllers
 
 
         //This mtd adds the product to session cookie.
-        [Route("[controller]/AddToCart/{productid}")]
+       
         [ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
