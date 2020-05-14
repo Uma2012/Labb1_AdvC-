@@ -71,23 +71,10 @@ namespace Labb1.Controllers
         [HttpGet]
         public IActionResult GetCartContent()
         {
-            var cartUserId = HttpContext.Session.Get<Guid>(_usersessionkey);
-           
-            var actualUserId = HttpContext.Session.Get<Guid>(_userManger.GetUserId(User));
-
-            ShoppingCart shoppingCart = new ShoppingCart();
-
-            if (actualUserId==Guid.Empty)
-            {
-                ViewBag.Message = "Session TimeOut";
-                return View(shoppingCart);
-            }
-
             var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
-           
-           // var products = _productRepository.GetAll();
 
-           
+            ShoppingCart shoppingCart = new ShoppingCart();     
+        
             shoppingCart.productlist = cart;
 
             //calculate total price only if the cart contains data
