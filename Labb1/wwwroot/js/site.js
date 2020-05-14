@@ -4,21 +4,11 @@
 // Write your JavaScript code.
 
 
-function DisplayResponseMessage(productName) {
-    console.log(productName);
-    // If productName is null, stop here! Dont show any message
-    if (productName == null)
-        alert("Something went wrong!");
-
-    document.getElementById('item_added_to_cart').innerHTML = productName;
-    $('#exampleModalCenter').modal('show');
-}
-
 
 
 function addtocart(productid, name) {
-    console.log(name, productid);
-    
+    // console.log(name, productid);
+
     let formData = new FormData();
 
     // Append form data
@@ -31,6 +21,7 @@ function addtocart(productid, name) {
     })
         .then((response) => {
             if (response.ok) {
+                updatecartamount();
                 DisplayResponseMessage(name);
             }
             else {
@@ -38,10 +29,52 @@ function addtocart(productid, name) {
             }
 
         });
-   
-  
+
 }
+
+function DisplayResponseMessage(productName) {
+    //console.log("productname: "productName);
+    // If productName is null, stop here! Dont show any message
+    if (productName == null)
+        alert("Something went wrong!");
+
+    document.getElementById('item_added_to_cart').innerHTML = productName;
+    $('#exampleModalCenter').modal('show');
+}
+
+function updatecartamount() {
+    console.log("Update cart button");
+    let formData = new FormData();
+    formData.append("__RequestVerificationToken", GetAntiForgerytoken());
+
+    // Get cart content using an AJAX call to GetCartContent() actionmethod
+    fetch('https://localhost:44333/ShoppingCart/UpdateCart', {
+        method: "Post",
+        body: formData
+    })
+
+        // Get response as Json data
+        .then((response) => {
+            return response.json();
+        })
+
+        // Update cart button with totalItems by manipulating DOM
+        .then((data) => {
+            console.log("data: ", data)
+           document.getElementById('cart-amount').innerHTML = data;
+           
+        });
+}
+
+
+
+
+//$(document).ready(function () {
+//    updatecartamount();
+//})
 
 function GetAntiForgerytoken() {
     return document.getElementById('AntiForgeryToken').innerHTML;
 }
+
+window.onload = (event) => { updatecartamount() };

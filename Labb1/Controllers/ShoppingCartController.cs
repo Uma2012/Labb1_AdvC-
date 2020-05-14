@@ -112,7 +112,15 @@ namespace Labb1.Controllers
 
         public IActionResult UpdateCart()
         {
-            return View();
+            var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
+            int? totalitems=0;
+            if (cart == null)
+                return new JsonResult(null);
+            else            
+               totalitems = cart.Sum(x => x.Amount);           
+           
+
+            return new JsonResult(totalitems);
         }
 
     }
