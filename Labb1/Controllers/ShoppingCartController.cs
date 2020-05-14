@@ -75,7 +75,7 @@ namespace Labb1.Controllers
 
             return RedirectToAction("GetCartContent", "ShoppingCart");
         }
-
+       
         public IActionResult GetCartContent()
         {
             var cart = HttpContext.Session.Get<List<CartItem>>(_cartName);
