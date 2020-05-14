@@ -36,6 +36,15 @@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+            @functions{
+                public string GetAntiXsrfRequestToken()
+                {
+                    return Xsrf.GetAndStoreTokens(Context).RequestToken;
+                }
+            }
+
+            <div style="display: none" id="AntiForgeryToken">@GetAntiXsrfRequestToken()</div>
         </main>
     </div>
 

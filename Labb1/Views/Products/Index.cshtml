@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Labb1.Products>
-@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@*@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @functions{
     public string GetAntiXsrfRequestToken()
     {
         return Xsrf.GetAndStoreTokens(Context).RequestToken;
     }
-}
+}*@
 
 @{
     ViewData["Title"] = "Index";
@@ -48,7 +48,7 @@
                 }
 
             </div>
-            <div style="display: none" id="AntiForgeryToken">@GetAntiXsrfRequestToken()</div>
+            @*<div style="display: none" id="AntiForgeryToken">@GetAntiXsrfRequestToken()</div>*@
 
         </div>
     </form>

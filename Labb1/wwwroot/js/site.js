@@ -78,4 +78,8 @@ function GetAntiForgerytoken() {
     return document.getElementById('AntiForgeryToken').innerHTML;
 }
 
-window.onload = (event) => { updatecartamount() };
+window.onload = (event) => {
+    console.log("onload event:");
+    GetAntiForgerytoken();
+    updatecartamount()
+};
