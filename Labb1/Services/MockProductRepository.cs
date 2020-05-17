@@ -25,6 +25,7 @@ namespace Labb1
 
                 //convert the string data to Products object
                 _productList = JsonConvert.DeserializeObject<List<Products>>(json);
+                
             }         
 
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Labb1.Controllers
 {
+    [Route("[controller]/[action]")]
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productRepository;
@@ -17,8 +18,7 @@ namespace Labb1.Controllers
         }
 
         //This mtd returns all the products
-        [HttpGet]
-        [Route("[controller]")]
+        [HttpGet]       
         public ActionResult<List<Products>> Index()
         {
           List<Products> products=  _productRepository.GetAll();
@@ -26,7 +26,7 @@ namespace Labb1.Controllers
         }
 
         //This mtd details of product based on incoming productid
-        [Route("[controller]/ProductDetails/{productid}")]
+        [HttpGet("productid")]
         public IActionResult ProductDetails(Guid productid)
         {
             Products product = _productRepository.GetProductById(productid);
