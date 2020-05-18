@@ -20,6 +20,7 @@ namespace ProductsService.Controllers
             this._productRepository = productRepository;
         }
 
+        // GET: api/Product
         [HttpGet]     
         public ActionResult<List<Product>> GetAllProducts()
         {
@@ -27,7 +28,8 @@ namespace ProductsService.Controllers
             return Ok(products);
         }
 
-       [HttpGet("productid")]
+        // GET: api/Product/95e87976-88e3-415d-b139-219538e948c1
+        [HttpGet("{productid}")]
         public IActionResult GetProductBy_Id(Guid productid)
         {
             Product product = _productRepository.GetProductById(productid);
