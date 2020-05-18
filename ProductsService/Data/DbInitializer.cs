@@ -42,7 +42,7 @@ namespace ProductsService.Data
             //Add the seed data to the context
             foreach (var product in _productList)
             {
-                context.Add(product);
+                context.Products.Add(product);
             }
 
             context.SaveChanges();
