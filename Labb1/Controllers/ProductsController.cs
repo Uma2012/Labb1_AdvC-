@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Labb1.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Labb1.Controllers
@@ -11,18 +11,24 @@ namespace Labb1.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productRepository;
+        private readonly ProductApiHandler _productapi;
 
-        public ProductsController(IProductRepository productRepository)
+        public ProductsController(IProductRepository productRepository, ProductApiHandler productApiHandler)
         {
             this._productRepository = productRepository;
+            this._productapi = productApiHandler;
         }
 
         //This mtd returns all the products
         [HttpGet]       
-        public ActionResult<List<Products>> Index()
+        public async Task<ActionResult<List<Products>>> Index()
         {
-          List<Products> products=  _productRepository.GetAll();
-            return View(products);
+
+            List<Products> allProducts = await _productapi.GetAllAsync<Products>("https://localhost:44310/api/product");
+            return View(allProducts);
+
+            //List<Products> products=  _productRepository.GetAll();
+            //return View(products);
         }
 
         //This mtd details of product based on incoming productid

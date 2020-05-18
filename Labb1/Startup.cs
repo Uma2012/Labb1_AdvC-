@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Labb1.Models;
+using Labb1.Services;
 
 namespace Labb1
 {
@@ -40,15 +41,24 @@ namespace Labb1
                 
             });
 
+            //registering productapi 
+            services.AddSingleton<ProductApiHandler>();
+
+            // Needed for IHttpClientFactory to work and accessing our ProductApi
+            services.AddHttpClient();
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
+
+
             services.AddSingleton<IProductRepository, MockProductRepository>();
 
-           // services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+           
             services.AddSession();
             services.AddRazorPages();
         }
