@@ -46,8 +46,10 @@ namespace Labb1.Controllers
                 ProductsList=form.productlist
                
             };
+
             User user = await _userManager.GetUserAsync(User);
             vm.User = user;
+            
             vm.Order = order;
 
             //Clear the session cookies once the order is created
