@@ -35,5 +35,26 @@ namespace Labb1.Services
             return null;
 
         }
+        public async Task<T> GetOneAsync<T>(string webApiPath) where T : class
+        {
+            var client = _clientFactory.CreateClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, webApiPath);
+
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("User-Agent", "Labb1");
+
+            var response = await client.SendAsync(request);
+           
+            if (response.IsSuccessStatusCode)
+            {
+                using var responseStream = await response.Content.ReadAsStreamAsync();
+                var product = await JsonSerializer.DeserializeAsync<T>(responseStream,
+                    new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                return product;
+            }
+
+            return null;
+        }
     }
 }

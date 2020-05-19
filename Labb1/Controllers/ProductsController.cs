@@ -33,10 +33,13 @@ namespace Labb1.Controllers
 
         //This mtd details of product based on incoming productid
         [HttpGet("productid")]
-        public IActionResult ProductDetails(Guid productid)
+        public async Task<IActionResult> ProductDetails(Guid productid)
         {
-            Products product = _productRepository.GetProductById(productid);
+            Products product = await _productapi.GetOneAsync<Products>("https://localhost:44310/api/product/"+productid);
             return View(product);
+
+            //Products product = _productRepository.GetProductById(productid);
+
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ProductsService.Controllers
 
         // GET: api/Product/95e87976-88e3-415d-b139-219538e948c1
         [HttpGet("{productid}")]
-        public IActionResult GetProductBy_Id(Guid productid)
+        public ActionResult<Product> GetProductBy_Id(Guid productid)
         {
             Product product = _productRepository.GetProductById(productid);
             return Ok(product);
