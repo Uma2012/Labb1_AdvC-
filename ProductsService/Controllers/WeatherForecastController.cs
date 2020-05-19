@@ -35,5 +35,7 @@ namespace ProductsService.Controllers
             })
             .ToArray();
         }
+
+       
     }
 }
