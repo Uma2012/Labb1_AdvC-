@@ -57,6 +57,7 @@ namespace ProductsService
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(_corsePolicyString);
 
             app.UseAuthorization();
 

@@ -9,7 +9,7 @@ using ProductsService.Repositories;
 
 namespace ProductsService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -34,6 +34,31 @@ namespace ProductsService.Controllers
         {
             Product product = _productRepository.GetProductById(productid);
             return Ok(product);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Product product)
+        {
+            var wasCreated = _productRepository.CreateProduct(product);
+            if (wasCreated)
+            {
+                return Ok();
+            }
+            else
+                return NotFound();
+
+        }
+
+        [HttpDelete]
+        public ActionResult<Guid> DeleteProduct(Guid id)
+        {
+            var wasDeleted = _productRepository.Delete(id);
+            if (wasDeleted)
+            {
+                return Ok(id);
+            }
+            else
+                return NotFound(id);
         }
     }
 }

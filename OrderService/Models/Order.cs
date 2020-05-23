@@ -7,11 +7,11 @@ namespace OrderService.Models
 {
     public class Order
     {
+        public int id { get; set; }
         public Guid OrderId { get; set; }
-        public Guid UserId { get; set; }
-        public List<CartItem> ProductsList { get; set; }
-        public decimal TotalPrice { get; set; }
-        public int TotalItems { get; set; }
+     
         public DateTime OrderDate { get; set; }
+        public Guid ProductId { get; set; }
+        public Guid UserId   { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using OrderService.Repositories;
 
 namespace OrderService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -21,10 +21,12 @@ namespace OrderService.Controllers
 
 
         [HttpPost]
-        public ActionResult<Order> CreateOrder([FromBody] ShoppingCart shoppingCart)
+        public ActionResult<Order> CreateOrder([FromBody] Order order)
         {
-            var createOrder = _orderRepository.CreateOrder(shoppingCart);
+            var createOrder = _orderRepository.CreateOrder(order);
             return Ok(createOrder);
         }
+
+       
     }
 }

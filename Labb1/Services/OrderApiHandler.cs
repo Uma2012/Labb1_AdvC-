@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labb1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -15,7 +16,7 @@ namespace Labb1.Services
         {
             this._clientFactory = clientFactory;
         }
-        public async Task PostAsync<T>(T obj, string webApiPath)
+        public async Task PostAsync<T>(T obj, string webApiPath) 
         {
             var client = _clientFactory.CreateClient();
             var request = new HttpRequestMessage(HttpMethod.Post, webApiPath);
@@ -24,15 +25,20 @@ namespace Labb1.Services
             request.Headers.Add("User-Agent", "Labb1");
 
             // Serialize object to JSON
-            var postJson = JsonSerializer.Serialize(obj);
+             var postJson = JsonSerializer.Serialize(obj);           
             request.Content = new StringContent(postJson, Encoding.UTF8, "application/json");
 
             // Send and receive request
             var result = await client.SendAsync(request);
-            var responseString = await result.Content.ReadAsStringAsync();
+            var responseString = await result.Content.ReadAsStreamAsync();
 
-            //var payload = await DeserializeJSON<APIPayload>(responseString);
-           // return new APIResponseData() { Status = result, ResponseContent = responseString, APIPayload = DeserializeTokens(responseString) };
+            Order order = await JsonSerializer.DeserializeAsync<Order>(responseString,
+                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+        
+
+             
+
         }
     }
 }

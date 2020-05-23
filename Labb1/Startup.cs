@@ -43,6 +43,7 @@ namespace Labb1
 
             //registering productapi 
             services.AddSingleton<ProductApiHandler>();
+            services.AddSingleton<OrderApiHandler>();
 
             // Needed for IHttpClientFactory to work and accessing our ProductApi
             services.AddHttpClient();

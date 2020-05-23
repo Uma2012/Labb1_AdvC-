@@ -10,5 +10,8 @@ namespace ProductsService.Repositories
     {
         Product GetProductById(Guid productid);
         List<Product> GetAll();
+        bool Delete(Guid id);
+
+        bool CreateProduct(Product product);
     }
 }

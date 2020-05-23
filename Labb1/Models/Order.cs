@@ -13,6 +13,7 @@ namespace Labb1.Models
         public decimal TotalPrice { get; set; }
         public int TotalItems { get; set; }
         public DateTime OrderDate { get; set; }
+        public Guid ProductId { get; set; }
     }
 
 }

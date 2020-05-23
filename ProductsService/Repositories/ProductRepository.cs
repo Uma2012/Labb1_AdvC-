@@ -38,7 +38,36 @@ namespace ProductsService.Repositories
             this._context = context;    
         }
 
-       
+        public bool CreateProduct(Product product)
+        {
+            try
+            {
+                _context.Products.Add(product);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool Delete(Guid id)
+        {
+            try
+            {
+                var product = GetProductById(id);
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+
 
         //Get all products
         public List<Product> GetAll()

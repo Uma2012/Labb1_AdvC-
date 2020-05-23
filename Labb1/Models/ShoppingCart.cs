@@ -9,7 +9,7 @@ namespace Labb1.Models
     {       
         public List<CartItem> productlist { get; set; }
         public decimal TotalPrice { get; set; }
-       
+        public Guid  Userid { get; set; }
     }
 
     public class CartItem

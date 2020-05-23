@@ -8,6 +8,10 @@ namespace OrderService.Repositories
 {
     public interface IOrderRepository
     {
-        public Order CreateOrder(ShoppingCart shoppingCart);
+        //public Order CreateOrder(ShoppingCart shoppingCart);
+        public Order CreateOrder(Order order);
+
+        public bool Delete(Guid id);
+        public Order GetOrderById(Guid orderid);
     }
 }

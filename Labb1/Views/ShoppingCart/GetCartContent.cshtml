@@ -22,6 +22,7 @@
             @for(int i=0;i<Model.productlist.Count;i++)
             {
             <tr>
+                @Html.HiddenFor(x=>x.productlist[i].Product.id)
                 <td>
                     @Html.DisplayFor(x=>x.productlist[i].Product.productName)
                     @Html.HiddenFor(x=>x.productlist[i].Product.productName)
@@ -44,6 +45,7 @@
     <div style="float:right" id="totalprice" asp-for="TotalPrice">
         <h5> Total Price: @Model.TotalPrice</h5>
         @Html.HiddenFor(x => x.TotalPrice)
+        
     </div>
     <div>
         <button class="btn btn-dark" asp-action="CreateOrder" asp-controller="Order" type="submit">Order</button>
