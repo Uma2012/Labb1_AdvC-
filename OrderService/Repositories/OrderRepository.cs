@@ -17,32 +17,7 @@ namespace OrderService.Repositories
             this._context = context;
         }
 
-        //public Order CreateOrder(Order shoppingCart)
-        //{
-        //    Order neworder = null;
-        //    Guid oriderid = Guid.NewGuid();
-            
-        //    ShoppingCart cart = new ShoppingCart();
-        //    cart.productlist = shoppingCart.productlist;        
-           
-
-        //    foreach (var item in cart.productlist)
-        //    {
-        //        neworder = new Order()
-        //        {
-        //            OrderId = oriderid,
-        //            OrderDate = DateTime.Now,
-        //             ProductId = item.Product.id
-
-        //            //TODO:how to retrive userid
-        //        };
-        //        _context.Orders.Add(neworder);
-        //        _context.SaveChanges();
-        //    }
-
-        //    return neworder;
-           
-        //}
+       
 
          public  Order CreateOrder(Order order)
         {

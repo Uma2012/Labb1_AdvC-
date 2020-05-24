@@ -12,22 +12,22 @@ namespace OrderService.Tests
 {
     public class ControllerTests:IClassFixture<OrderFixture>
     {
-    //     OrderFixture _fixture;
-    //    public ControllerTests(OrderFixture fixture)
-    //    {
-    //        this._fixture = fixture;
-    //    }
+        OrderFixture _fixture;
+        public ControllerTests(OrderFixture fixture)
+        {
+            this._fixture = fixture;
+        }
 
-        //[Fact]
-        //public async Task GetOrderById_Returns_NotFound()
-        //{
-        //    using (var client = new TestClientProvoider().Client)
-        //    {
-        //        var response = await client.GetAsync("api/order/GetOrderBy_Id?orderid=" + Guid.Empty);
-        //        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        [Fact]
+        public async Task GetOrderById_Returns_NotFound()
+        {
+            using (var client = new TestClientProvoider().Client)
+            {
+                var response = await client.GetAsync("api/order/GetOrderBy_Id?orderid=" + Guid.Empty);
+                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        //    }
-        //}
+            }
+        }
 
         [Fact]
         public async Task CreateOrder_Returns_Created_Order()

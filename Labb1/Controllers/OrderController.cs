@@ -17,45 +17,28 @@ namespace Labb1.Controllers
         private readonly string _cartName;
         private readonly UserManager<User> _userManager;
         private readonly OrderApiHandler _orderApiHandler;
-        private readonly ProductApiHandler _productapi;
 
-        public OrderController(IConfiguration config,UserManager<User> userManager,OrderApiHandler orderapiHandler, ProductApiHandler productApiHandler)
+        public OrderController(IConfiguration config,UserManager<User> userManager,OrderApiHandler orderapiHandler)
         {
             this._cartName = config["CartSessionCookie:Name"];
             this._userManager = userManager;
             this._orderApiHandler = orderapiHandler;
-            this._productapi = productApiHandler;
         }
 
-        //This mtd calculate total number of products in the session
-        //Creats order
-        //Get the User information
+        //calling OrderService to store the Order object and assigning values to orderviewModel
         [HttpPost]
         public async Task<IActionResult> CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
-         {
-        //    List<Guid> productids = new List<Guid>();
-        //    foreach (var item in form.productlist)
-        //    {
-        //        Products product = await _productapi.GetOneAsync<Products>("https://localhost:44310/api/product/GetProductBy_Id/" + item);
-        //        productids.Add(product.id);
-        //    }
-        //    foreach (var item in productids)
-        //    {
-        //        var cr = new Order()
-        //        {
-        //            ProductId=item
-        //        };
-        //    }
-
+         {       
 
             OrderViewModel vm = new OrderViewModel();
-            Guid oriderid = Guid.NewGuid();  //generate unique orderid (if the order contains different productid, the orderid is unique for that Order)
+
+            //generate unique orderid (if the order contains different productid, the orderid is unique for that Order)
+            Guid oriderid = Guid.NewGuid();  
            
             var productlist = form.productlist;
-           
             
             Order createorder = null;
-
+            //assigning values for the Order object. 
             foreach (var item in productlist)
             {
                 createorder = new Order()
@@ -64,13 +47,13 @@ namespace Labb1.Controllers
                     OrderDate = DateTime.Now,
                     UserId = Guid.Parse(_userManager.GetUserId(User)),
                     ProductId=item.Product.id  
-
                 };
-                await _orderApiHandler.PostAsync<Order>(createorder, "https://localhost:44383/api/order/CreateOrder");
 
+                //calling OrderSevice for storing the Order object
+              await _orderApiHandler.PostAsync<Order>(createorder, "https://localhost:44383/api/order/CreateOrder");
             }
 
-            //calculate total items of the Order
+            //assigning totalitems to the order object
             int totalitems = 0;            
             foreach (var item in productlist)
             {
@@ -78,14 +61,18 @@ namespace Labb1.Controllers
             }
             createorder.TotalItems = totalitems;
 
-            
-           // decimal totalprice = form.TotalPrice;
+            //assigning totalprice to the order object
             createorder.TotalPrice = form.TotalPrice;
+
+            //assigning productlist to the order object
             createorder.ProductsList = form.productlist;
 
-            vm.Order = createorder;
+           //Retriving user information
             User user = await _userManager.GetUserAsync(User);
             vm.User = user;
+
+            //assinging order object to viewmodel
+            vm.Order = createorder;
 
             //Clear the session cookies once the order is created
             if (HttpContext.Session.GetString(_cartName) != null)
