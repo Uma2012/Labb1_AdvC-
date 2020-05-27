@@ -12,6 +12,6 @@ namespace ProductsService.Repositories
         List<Product> GetAll();
         bool Delete(Guid id);
 
-        bool CreateProduct(Product product);
+        Product CreateProduct(Product product);
     }
 }

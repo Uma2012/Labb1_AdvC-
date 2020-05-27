@@ -28,24 +28,27 @@ namespace ProductsService.Controllers
             return Ok(products);
         }
 
-        // GET: api/Product/95e87976-88e3-415d-b139-219538e948c1
-        [HttpGet("{productid}")]
+        // GET: api/Product/GetProductBy_Id?productid=95e87976-88e3-415d-b139-219538e948c1
+        [HttpGet]
         public ActionResult<Product> GetProductBy_Id(Guid productid)
         {
             Product product = _productRepository.GetProductById(productid);
-            return Ok(product);
+            if (product != null)
+                return Ok(product);
+            else
+                return NotFound();
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult<Product> Create(Product product)
         {
-            var wasCreated = _productRepository.CreateProduct(product);
-            if (wasCreated)
+            var createdProduct= _productRepository.CreateProduct(product);
+            if (createdProduct!=null)
             {
-                return Ok();
+                return Ok(createdProduct);
             }
             else
-                return NotFound();
+                return BadRequest();
 
         }
 

@@ -24,7 +24,7 @@ namespace OrderService.Tests
             using (var client = new TestClientProvoider().Client)
             {
                 var response = await client.GetAsync("api/order/GetOrderBy_Id?orderid=" + Guid.Empty);
-                Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             }
         }
@@ -38,17 +38,10 @@ namespace OrderService.Tests
                 var payload = JsonSerializer.Serialize(
                     new Order()
                     {
-
                         OrderId = Guid.NewGuid(),
                         OrderDate = DateTime.Now,
-                        //TotalItems = 5,
-                        //TotalPrice = 1200
-
-                        //TODO: how to assign values to productlist??
-                        //ProductsList= new List<CartItem>()
-                        //{
-
-                        //}
+                        UserId=Guid.Parse("bbd9482e-1193-4545-88b7-81aa97ebfa77"),
+                        ProductId=Guid.Parse("08b446ae-03bb-4e53-96de-c34f31a79f09")
                     }
                     );
             
@@ -70,7 +63,7 @@ namespace OrderService.Tests
                 }
 
                 var deleteResponse = await client.DeleteAsync($"/api/order/deleteorder?id={orderid}");
-                using (var deleteStream = await response.Content.ReadAsStreamAsync())
+                using (var deleteStream = await deleteResponse.Content.ReadAsStreamAsync())
                 {
                     var deletedid = await JsonSerializer.DeserializeAsync<Guid>(deleteStream,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
@@ -92,15 +85,10 @@ namespace OrderService.Tests
                     {
 
                         OrderId = Guid.NewGuid(),
-                        OrderDate = DateTime.Now
-                        //TotalItems = 5,
-                        //TotalPrice = 1200
+                        OrderDate = DateTime.Now,
+                        UserId = Guid.Parse("bbd9482e-1193-4545-88b7-81aa97ebfa77"),
+                        ProductId = Guid.Parse("08b446ae-03bb-4e53-96de-c34f31a79f09")
 
-                        //TODO: how to assign values to productlist??
-                        //ProductsList= new List<CartItem>()
-                        //{
-
-                        //}
                     }
                     );
 

@@ -25,7 +25,7 @@ namespace ProductsService.Tests
                     new Product()
                     {
                         productName = "Test Product",
-                        id =Guid.Parse("2707e97b-76a4-458d-bea6-2399f1cc8a7e2"),
+                        //id =Guid.Parse("2707e97b-76a4-458d-bea6-2399f1cc8a7e2"),
                         description = "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
                         color = "Crimson",
                         publishDate = Convert.ToDateTime("2019-07-07T22:17:03Z"),

@@ -27,6 +27,18 @@ namespace OrderService.Controllers
             return Ok(createOrder);
         }
 
+        [HttpDelete]
+        public ActionResult<Guid> DeleteOrder(Guid id)
+        {
+            var wasDeleted = _orderRepository.Delete(id);
+            if (wasDeleted)
+            {
+                return Ok(id);
+            }
+            else
+                return NotFound(id);
+        }
+
        
     }
 }

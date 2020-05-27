@@ -12,25 +12,7 @@ namespace ProductsService.Repositories
 {
     public class ProductRepository: IProductRepository
     {
-        //private List<Product> _productList;
-
-        ////Reading the json file and store it in a object(Database object)
-        //public ProductRepository()
-        //{
-
-        //    //getting json file datá path
-        //    string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\products.json");
-
-        //    //reading the json file
-        //    using (StreamReader r = new StreamReader(path))
-        //    {
-        //        string json = r.ReadToEnd();
-
-        //        //convert the string data to Products object
-        //        _productList = JsonConvert.DeserializeObject<List<Product>>(json);
-        //    }
-
-        //}
+       
 
         private readonly ProductDbContext _context;
         public ProductRepository(ProductDbContext context)
@@ -38,17 +20,19 @@ namespace ProductsService.Repositories
             this._context = context;    
         }
 
-        public bool CreateProduct(Product product)
+        public Product CreateProduct(Product product)
         {
+            if (product.productName == null || product.publishDate == null||product.price==0)
+                return product = null;
             try
             {
                 _context.Products.Add(product);
                 _context.SaveChanges();
-                return true;
+                return product;
             }
             catch (Exception ex)
             {
-                return false;
+                return null;
             }
         }
 
@@ -83,29 +67,8 @@ namespace ProductsService.Repositories
 
         public Product GetProductById(Guid productid)
         {
-            //Product product = null;
-
-            //if (_productList.Any(x => x.id == productid))
-            //{
-            //    product = _productList.Where(x => x.id == productid)
-            //       .Select(x => new Product()
-            //       {
-            //           id = x.id,
-            //           color = x.color,
-            //           description = x.description,
-            //           productName = x.productName,
-            //           price = x.price,
-            //           photo = x.photo
-            //       })
-            //       .FirstOrDefault();
-            //}
-
-            //return product;
-
             var product = _context.Products.FirstOrDefault(x => x.id == productid);
             return product;
-
-
 
         }
 

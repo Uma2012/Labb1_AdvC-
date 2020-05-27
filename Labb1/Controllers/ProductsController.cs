@@ -35,7 +35,7 @@ namespace Labb1.Controllers
         [HttpGet("productid")]
         public async Task<IActionResult> ProductDetails(Guid productid)
         {
-            Products product = await _productapi.GetOneAsync<Products>("https://localhost:44310/api/product/GetProductBy_Id/" + productid);
+            Products product = await _productapi.GetOneAsync<Products>("https://localhost:44310/api/product/GetProductBy_Id?productid=" + productid);
             return View(product);
 
             //Products product = _productRepository.GetProductById(productid);
