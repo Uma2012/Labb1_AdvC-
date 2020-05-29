@@ -19,26 +19,22 @@ namespace Labb1.Controllers
             this._productapi = productApiHandler;
         }
 
-        //This mtd returns all the products
+        //Calls the ProductService to return all products
         [HttpGet]       
         public async Task<ActionResult<List<Products>>> Index()
         {
 
             List<Products> allProducts = await _productapi.GetAllAsync<Products>("https://localhost:44310/api/product/GetAllProducts");
             return View(allProducts);
-
-            //List<Products> products=  _productRepository.GetAll();
-            //return View(products);
+           
         }
 
-        //This mtd details of product based on incoming productid
+        //This mtd calls ProductService to return  Product based on its id
         [HttpGet("productid")]
         public async Task<IActionResult> ProductDetails(Guid productid)
         {
             Products product = await _productapi.GetOneAsync<Products>("https://localhost:44310/api/product/GetProductBy_Id?productid=" + productid);
             return View(product);
-
-            //Products product = _productRepository.GetProductById(productid);
 
         }
     }

@@ -11,8 +11,7 @@ using ProductsService.Data;
 namespace ProductsService.Repositories
 {
     public class ProductRepository: IProductRepository
-    {
-       
+    {      
 
         private readonly ProductDbContext _context;
         public ProductRepository(ProductDbContext context)
@@ -20,6 +19,33 @@ namespace ProductsService.Repositories
             this._context = context;    
         }
 
+        /// <summary>
+        /// Get all Products
+        /// </summary>
+        /// <returns></returns>
+        public List<Product> GetAll()
+        {
+            var products = _context.Products.ToList();
+            return products;
+        }
+
+
+        /// <summary>
+        /// Get the product by its id
+        /// </summary>
+        /// <returns></returns>
+
+        public Product GetProductById(Guid productid)
+        {
+            var product = _context.Products.FirstOrDefault(x => x.id == productid);
+            return product;
+
+        }
+
+        /// <summary>
+        /// store the product to the database 
+        /// </summary>
+        /// <returns>Product</returns>        
         public Product CreateProduct(Product product)
         {
             if (product.productName == null || product.publishDate == null || product.price == 0)
@@ -36,6 +62,7 @@ namespace ProductsService.Repositories
             }
         }
 
+        //Delete the Product based on incoming Products's id
         public bool Delete(Guid id)
         {
             try
@@ -53,24 +80,9 @@ namespace ProductsService.Repositories
 
 
 
-        //Get all products
-        public List<Product> GetAll()
-        {
-            var products = _context.Products.ToList();
-            return products;
-        }
+       
 
-        /// <summary>
-        /// Get the product by its id
-        /// </summary>
-        /// <returns></returns>
-
-        public Product GetProductById(Guid productid)
-        {
-            var product = _context.Products.FirstOrDefault(x => x.id == productid);
-            return product;
-
-        }
+       
 
 
 

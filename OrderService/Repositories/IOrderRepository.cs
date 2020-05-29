@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 namespace OrderService.Repositories
 {
     public interface IOrderRepository
-    {
-        //public Order CreateOrder(ShoppingCart shoppingCart);
+    {        
         public Order CreateOrder(Order order);
-
         public bool Delete(Guid id);
         public List<Order> GetOrderById(Guid orderid);
     }

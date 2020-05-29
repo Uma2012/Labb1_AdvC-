@@ -14,12 +14,10 @@ namespace OrderService.Repositories
         public OrderRepository(OrderDbContext context)
         {
             this._context = context;
-        }
-
-       
-
-         public  Order CreateOrder(Order order)
-        {
+        }       
+        //Creates order to database
+        public  Order CreateOrder(Order order)
+         {
             if (order.OrderId == null || order.OrderDate == null || order.ProductId == Guid.Empty)
                 return order = null;
             try
@@ -32,14 +30,14 @@ namespace OrderService.Repositories
             {
                 return null;
             }
-
         }
 
+       //Delete an order
         public bool Delete(Guid id)
         {
             try
             {
-                var order = GetOrderById(id);
+               var order = GetOrderById(id);
                 if (order != null)
                 {
                     _context.Orders.RemoveRange(order);
@@ -52,10 +50,10 @@ namespace OrderService.Repositories
             catch(Exception ex)
             {
                 return false;
-            }
-           
+            }           
         }
 
+        //Get order by its id
         public List<Order> GetOrderById(Guid orderid)
         {
             var IsContains = _context.Orders.FirstOrDefault(x=>x.OrderId==orderid);
@@ -66,10 +64,8 @@ namespace OrderService.Repositories
                 return order;
             }
             else
-                return null;
-           
+                return null;           
         }
-
        
     }
 }

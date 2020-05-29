@@ -25,7 +25,7 @@ namespace Labb1.Controllers
             this._orderApiHandler = orderapiHandler;
         }
 
-        //calling OrderService to store the Order object and assigning values to orderviewModel
+        //Assigning values to Order object and calling OrderService to store the Order object
         [HttpPost]
         public async Task<IActionResult> CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
          {       

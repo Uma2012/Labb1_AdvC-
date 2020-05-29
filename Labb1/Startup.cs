@@ -41,7 +41,7 @@ namespace Labb1
                 
             });
 
-            //registering productapi 
+            //registering productapi and orderapi
             services.AddSingleton<ProductApiHandler>();
             services.AddSingleton<OrderApiHandler>();
 

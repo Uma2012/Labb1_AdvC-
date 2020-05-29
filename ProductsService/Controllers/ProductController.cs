@@ -20,7 +20,7 @@ namespace ProductsService.Controllers
             this._productRepository = productRepository;
         }
 
-        // GET: api/Product
+        // GET: api/Product/GetAllProducts
         [HttpGet]     
         public ActionResult<List<Product>> GetAllProducts()
         {
@@ -48,15 +48,11 @@ namespace ProductsService.Controllers
                 return Ok(createdProduct);
             }
             else
-                return BadRequest();
-
-            //if (product == null)
-            //    return BadRequest();
-            //var createdProduct = _productRepository.CreateProduct(product);
-            //return Ok(product);
+                return BadRequest();            
 
         }
 
+        //Delete: api/product/DeleteProduct?id=95e87976-88e3-415d-b139-219538e948c1
         [HttpDelete]
         public ActionResult<Guid> DeleteProduct(Guid id)
         {

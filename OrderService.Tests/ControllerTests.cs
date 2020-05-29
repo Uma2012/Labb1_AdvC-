@@ -52,9 +52,7 @@ namespace OrderService.Tests
                     var deletedid = await JsonSerializer.DeserializeAsync<Guid>(deleteStream,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
-
-
-                }
+            }
         }
 
         [Fact]
@@ -87,8 +85,6 @@ namespace OrderService.Tests
                     var deletedid = await JsonSerializer.DeserializeAsync<Guid>(deleteStream,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
-
-
             }
         }
 
@@ -129,7 +125,7 @@ namespace OrderService.Tests
                 }
             }
 
-            }
+        }
 
         [Fact]
         public async Task DeleteOrder_Returns_Notfound()
@@ -141,9 +137,5 @@ namespace OrderService.Tests
 
             }
         }
-
-
-
-
     }
 }

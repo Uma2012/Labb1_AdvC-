@@ -35,8 +35,7 @@ namespace ProductsService.Tests
             using (var client = new TestClientProvider().Client)
             {
                 var response = await client.GetAsync("api/product/GetProductBy_Id?productid=" + Guid.Empty);               
-                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);                
-
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);               
             }
         }
 
@@ -54,9 +53,7 @@ namespace ProductsService.Tests
 
                     Assert.Equal(_fixture.product.id, product.id);
                 }
-
             }
-
         }
 
         [Fact]
@@ -105,7 +102,6 @@ namespace ProductsService.Tests
             }
         }
 
-
         [Fact]
         public async Task CreateProduct_Returns_BadRequest()
         {
@@ -137,7 +133,6 @@ namespace ProductsService.Tests
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
 
-
             }
         }
 
@@ -158,7 +153,6 @@ namespace ProductsService.Tests
                         photo = "material_1.jpg"
                     }
                     );
-
 
                 HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync($"/api/product/Create", content);
@@ -182,7 +176,6 @@ namespace ProductsService.Tests
 
         }
 
-
         [Fact]
         public async Task DeleteProduct_Returns_NotFound()
         {
@@ -190,9 +183,7 @@ namespace ProductsService.Tests
             {
                 var response = await client.DeleteAsync("/api/product/DeleteProduct?id=" + Guid.Empty);
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
             }
-
         }       
 
     }

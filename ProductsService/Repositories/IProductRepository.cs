@@ -11,7 +11,6 @@ namespace ProductsService.Repositories
         Product GetProductById(Guid productid);
         List<Product> GetAll();
         bool Delete(Guid id);
-
         Product CreateProduct(Product product);
     }
 }
