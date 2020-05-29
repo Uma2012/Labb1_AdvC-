@@ -10,24 +10,8 @@ using Xunit;
 
 namespace OrderService.Tests
 {
-    public class ControllerTests:IClassFixture<OrderFixture>
-    {
-        OrderFixture _fixture;
-        public ControllerTests(OrderFixture fixture)
-        {
-            this._fixture = fixture;
-        }
-
-        [Fact]
-        public async Task GetOrderById_Returns_NotFound()
-        {
-            using (var client = new TestClientProvoider().Client)
-            {
-                var response = await client.GetAsync("api/order/GetOrderBy_Id?orderid=" + Guid.Empty);
-                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-
-            }
-        }
+    public class ControllerTests
+    {  
 
         [Fact]
         public async Task CreateOrder_Returns_Created_Order()
@@ -38,7 +22,7 @@ namespace OrderService.Tests
                 var payload = JsonSerializer.Serialize(
                     new Order()
                     {
-                        OrderId = Guid.NewGuid(),
+                        OrderId = Guid.Parse("2ae4bb3a-9664-4235-b721-af45dfa7d81a"),
                         OrderDate = DateTime.Now,
                         UserId=Guid.Parse("bbd9482e-1193-4545-88b7-81aa97ebfa77"),
                         ProductId=Guid.Parse("08b446ae-03bb-4e53-96de-c34f31a79f09")
@@ -73,6 +57,41 @@ namespace OrderService.Tests
                 }
         }
 
+        [Fact]
+        public async Task CreateOrder_Returns_BadRequest()
+        {
+            Guid orderid = Guid.Empty;
+            using (var client = new TestClientProvoider().Client)
+            {
+                var payload = JsonSerializer.Serialize(
+                     new Order()
+                     {
+
+                     });
+
+                HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync($"/api/order/Createorder", content);
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var order = await JsonSerializer.DeserializeAsync<Order>(responseStream,
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+                    orderid = order.OrderId;
+
+                    Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+                }
+                var deleteResponse = await client.DeleteAsync($"/api/order/deleteorder?id={orderid}");
+                using (var deleteStream = await deleteResponse.Content.ReadAsStreamAsync())
+                {
+                    var deletedid = await JsonSerializer.DeserializeAsync<Guid>(deleteStream,
+                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                }
+
+
+            }
+        }
+
 
         [Fact]
         public async Task DeleteOrder_Returns_Deleted_Id()
@@ -83,15 +102,12 @@ namespace OrderService.Tests
                 var payload = JsonSerializer.Serialize(
                     new Order()
                     {
-
-                        OrderId = Guid.NewGuid(),
+                        OrderId = Guid.Parse("2ae4bb3a-9664-4235-b721-af45dfa7d81a"),
                         OrderDate = DateTime.Now,
                         UserId = Guid.Parse("bbd9482e-1193-4545-88b7-81aa97ebfa77"),
                         ProductId = Guid.Parse("08b446ae-03bb-4e53-96de-c34f31a79f09")
-
                     }
                     );
-
 
                 HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync($"/api/order/createorder", content);
@@ -114,6 +130,17 @@ namespace OrderService.Tests
             }
 
             }
+
+        [Fact]
+        public async Task DeleteOrder_Returns_Notfound()
+        {
+            using (var client = new TestClientProvoider().Client)
+            {
+                var response = await client.DeleteAsync("/api/order/deleteorder?id=" + Guid.Empty);
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            }
+        }
 
 
 

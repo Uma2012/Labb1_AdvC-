@@ -80,7 +80,8 @@ namespace ProductsService.Tests
 
                 HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync($"/api/product/Create", content);
+               var response = await client.PostAsync($"/api/product/Create", content);
+
 
                 using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
@@ -119,7 +120,8 @@ namespace ProductsService.Tests
 
                 HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
 
-                var response = await client.PostAsync($"/api/product/Create", content); using (var responseStream = await response.Content.ReadAsStreamAsync())
+                var response = await client.PostAsync($"/api/product/Create", content);
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
                     var product = await JsonSerializer.DeserializeAsync<Product>(responseStream,
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
@@ -127,7 +129,7 @@ namespace ProductsService.Tests
                     productid = product.id;
 
                     Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-                }
+               }
                 var deleteResponse = await client.DeleteAsync($"/api/product/DeleteProduct?id={productid}");
                 using (var deleteStream = await deleteResponse.Content.ReadAsStreamAsync())
                 {
@@ -191,10 +193,7 @@ namespace ProductsService.Tests
 
             }
 
-        }
-        
-
-
+        }       
 
     }
 }

@@ -12,6 +12,6 @@ namespace OrderService.Repositories
         public Order CreateOrder(Order order);
 
         public bool Delete(Guid id);
-        public Order GetOrderById(Guid orderid);
+        public List<Order> GetOrderById(Guid orderid);
     }
 }

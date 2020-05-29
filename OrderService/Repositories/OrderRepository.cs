@@ -20,9 +20,18 @@ namespace OrderService.Repositories
 
          public  Order CreateOrder(Order order)
         {
-             _context.Orders.Add(order);
-            _context.SaveChanges();
-            return order;
+            if (order.OrderId == null || order.OrderDate == null || order.ProductId == Guid.Empty)
+                return order = null;
+            try
+            {
+                _context.Orders.Add(order);
+                _context.SaveChanges();
+                return order;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
 
         }
 
@@ -31,9 +40,14 @@ namespace OrderService.Repositories
             try
             {
                 var order = GetOrderById(id);
-                _context.Orders.Remove(order);
-                _context.SaveChanges();
-                return true;
+                if (order != null)
+                {
+                    _context.Orders.RemoveRange(order);
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                    return false;
             }
             catch(Exception ex)
             {
@@ -42,21 +56,18 @@ namespace OrderService.Repositories
            
         }
 
-        public Order GetOrderById(Guid orderid)
+        public List<Order> GetOrderById(Guid orderid)
         {
-            //List<Order> orderlist = new List<Order>();
-            //int orderrows=  _context.Orders.Count(x => x.OrderId == orderid);
-            //Order order = new Order();
-            //for (int i = 0; i < orderrows; i++)
-            //{
-            //     order = _context.Orders.FirstOrDefault(x => x.OrderId == orderid);
-            //    orderlist[i] = order;
-            //}
-            //return order;
-
-
-            var order = _context.Orders.FirstOrDefault(x => x.OrderId == orderid);
-            return order;
+            var IsContains = _context.Orders.FirstOrDefault(x=>x.OrderId==orderid);
+            if (IsContains != null)
+            {
+                List<Order> order = new List<Order>();
+                order = _context.Orders.Where(x => x.OrderId == orderid).ToList();
+                return order;
+            }
+            else
+                return null;
+           
         }
 
        

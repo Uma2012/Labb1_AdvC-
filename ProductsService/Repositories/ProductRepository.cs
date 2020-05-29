@@ -22,7 +22,7 @@ namespace ProductsService.Repositories
 
         public Product CreateProduct(Product product)
         {
-            if (product.productName == null || product.publishDate == null||product.price==0)
+            if (product.productName == null || product.publishDate == null || product.price == 0)
                 return product = null;
             try
             {

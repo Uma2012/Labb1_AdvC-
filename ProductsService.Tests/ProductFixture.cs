@@ -14,7 +14,7 @@ namespace ProductsService.Tests
 
         public ProductFixture()
         {
-            product = Initialize().Result;
+            product =  Initialize().Result;
         }
 
         private async Task<Product> Initialize()
@@ -24,8 +24,7 @@ namespace ProductsService.Tests
                 var payload = JsonSerializer.Serialize(
                     new Product()
                     {
-                        productName = "Test Product",
-                        //id =Guid.Parse("2707e97b-76a4-458d-bea6-2399f1cc8a7e2"),
+                        productName = "Test Product",                      
                         description = "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.\n\nDonec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
                         color = "Crimson",
                         publishDate = Convert.ToDateTime("2019-07-07T22:17:03Z"),
@@ -45,10 +44,7 @@ namespace ProductsService.Tests
                         new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                     return createProduct;
                 }
-
-
             }
-
         }
 
         public async void Dispose()
@@ -59,7 +55,7 @@ namespace ProductsService.Tests
                 using (var responseStream = await deleteResponse.Content.ReadAsStreamAsync())
                 {
                     var deletedId = await JsonSerializer.DeserializeAsync<Guid>(responseStream,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                                       new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
                 }
             }
         }

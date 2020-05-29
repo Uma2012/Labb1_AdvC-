@@ -42,13 +42,18 @@ namespace ProductsService.Controllers
         [HttpPost]
         public ActionResult<Product> Create(Product product)
         {
-            var createdProduct= _productRepository.CreateProduct(product);
-            if (createdProduct!=null)
+            var createdProduct = _productRepository.CreateProduct(product);
+            if (createdProduct != null)
             {
                 return Ok(createdProduct);
             }
             else
                 return BadRequest();
+
+            //if (product == null)
+            //    return BadRequest();
+            //var createdProduct = _productRepository.CreateProduct(product);
+            //return Ok(product);
 
         }
 
