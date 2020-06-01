@@ -28,8 +28,8 @@ namespace ProductsService.Controllers
             return Ok(products);
         }
 
-        // GET: api/Product/GetProductBy_Id?productid=95e87976-88e3-415d-b139-219538e948c1
-        [HttpGet]
+        // GET: api/Product/GetProductBy_Id/95e87976-88e3-415d-b139-219538e948c1
+        [HttpGet("{productid}")]
         public ActionResult<Product> GetProductBy_Id(Guid productid)
         {
             Product product = _productRepository.GetProductById(productid);

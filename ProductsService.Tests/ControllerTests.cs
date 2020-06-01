@@ -44,7 +44,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
-                var productResponse = await client.GetAsync($"/api/product/GetProductBy_Id?productid={_fixture.product.id}");
+                var productResponse = await client.GetAsync($"/api/product/GetProductBy_Id/{_fixture.product.id}");
 
                 using (var responseStream = await productResponse.Content.ReadAsStreamAsync())
                 {
