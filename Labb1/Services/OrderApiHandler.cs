@@ -1,4 +1,5 @@
 ﻿using Labb1.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,12 @@ namespace Labb1.Services
     public class OrderApiHandler
     {
         private readonly IHttpClientFactory _clientFactory;
-        public OrderApiHandler(IHttpClientFactory clientFactory)
+        private readonly string orderApiKey;
+        public OrderApiHandler(IHttpClientFactory clientFactory, IConfiguration config)
         {
             this._clientFactory = clientFactory;
+            orderApiKey = config.GetValue<string>("ApiKeys:OrderApiKey");
+
         }
         public async Task PostAsync<T>(T obj, string webApiPath) 
         {
@@ -23,6 +27,7 @@ namespace Labb1.Services
 
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "Labb1");
+            request.Headers.Add("Api_Key", orderApiKey);
 
             // Serialize object to JSON
              var postJson = JsonSerializer.Serialize(obj);           

@@ -18,6 +18,7 @@ namespace OrderService.Tests
         {
             using (var client = new TestClientProvoider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretOrderApiKey");
                 Guid orderid = Guid.Empty;
                 var payload = JsonSerializer.Serialize(
                     new Order()
@@ -61,6 +62,8 @@ namespace OrderService.Tests
             Guid orderid = Guid.Empty;
             using (var client = new TestClientProvoider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretOrderApiKey");
+
                 var payload = JsonSerializer.Serialize(
                      new Order()
                      {
@@ -94,6 +97,7 @@ namespace OrderService.Tests
         {
             using (var client = new TestClientProvoider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretOrderApiKey");
                 Guid orderid = Guid.Empty;
                 var payload = JsonSerializer.Serialize(
                     new Order()
@@ -132,6 +136,7 @@ namespace OrderService.Tests
         {
             using (var client = new TestClientProvoider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretOrderApiKey");
                 var response = await client.DeleteAsync("/api/order/deleteorder?id=" + Guid.Empty);
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 

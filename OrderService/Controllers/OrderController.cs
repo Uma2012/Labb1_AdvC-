@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OrderService.Filters;
 using OrderService.Models;
 using OrderService.Repositories;
+
 
 namespace OrderService.Controllers
 {
@@ -19,7 +21,7 @@ namespace OrderService.Controllers
             this._orderRepository = orderRepository;
         }
 
-
+        [ApiKeyAuth]
         [HttpPost]
         public ActionResult<Order> CreateOrder([FromBody] Order order)
         {
@@ -30,6 +32,7 @@ namespace OrderService.Controllers
                 return BadRequest();
         }
 
+        [ApiKeyAuth]
         [HttpDelete]
         public ActionResult<Guid> DeleteOrder(Guid id)
         {

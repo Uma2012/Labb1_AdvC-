@@ -39,6 +39,7 @@ namespace ProductsService.Tests
 
             //Use the StartUp.cs from the test-target project
             webHostBuilder.UseStartup<Startup>();
+            webHostBuilder.UseConfiguration(configuration);
 
             Server = new TestServer(webHostBuilder);
             Client = Server.CreateClient();

@@ -15,12 +15,12 @@ namespace Labb1.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly string _cartName;
-        private readonly IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;        
 
         public ShoppingCartController(IProductRepository productRepository,IConfiguration config )
         {
             this._cartName = config["CartSessionCookie:Name"];
-            this._productRepository = productRepository;
+            this._productRepository = productRepository;           
         }
 
 

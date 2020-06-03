@@ -17,12 +17,14 @@ namespace Labb1.Controllers
         private readonly string _cartName;
         private readonly UserManager<User> _userManager;
         private readonly OrderApiHandler _orderApiHandler;
+        private readonly string _apiRootUrl;
 
         public OrderController(IConfiguration config,UserManager<User> userManager,OrderApiHandler orderapiHandler)
         {
             this._cartName = config["CartSessionCookie:Name"];
             this._userManager = userManager;
             this._orderApiHandler = orderapiHandler;
+            _apiRootUrl = config.GetValue(typeof(string), "OrderApiRoot").ToString();
         }
 
         //Assigning values to Order object and calling OrderService to store the Order object
@@ -50,7 +52,8 @@ namespace Labb1.Controllers
                 };
 
                 //calling OrderSevice for storing the Order object
-              await _orderApiHandler.PostAsync<Order>(createorder, "https://localhost:44383/api/order/CreateOrder");
+                await _orderApiHandler.PostAsync<Order>(createorder, $"{_apiRootUrl}CreateOrder");
+                //await _orderApiHandler.PostAsync<Order>(createorder, "https://localhost:44383/api/order/CreateOrder");
             }
 
             //assigning totalitems to the order object

@@ -61,6 +61,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 Guid productid = Guid.Empty;
                 var payload = JsonSerializer.Serialize(
                       new Product()
@@ -108,6 +109,7 @@ namespace ProductsService.Tests
             Guid productid = Guid.Empty;
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 var payload = JsonSerializer.Serialize(
                      new Product()
                      {
@@ -141,6 +143,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 Guid productid = Guid.Empty;
                 var payload = JsonSerializer.Serialize(
                     new Product()
@@ -181,6 +184,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 var response = await client.DeleteAsync("/api/product/DeleteProduct?id=" + Guid.Empty);
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             }

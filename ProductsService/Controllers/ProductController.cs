@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductsService.Filters;
 using ProductsService.Models;
 using ProductsService.Repositories;
 
@@ -39,6 +40,7 @@ namespace ProductsService.Controllers
                 return NotFound();
         }
 
+        [ApiKeyAuth]
         [HttpPost]
         public ActionResult<Product> Create(Product product)
         {
@@ -53,6 +55,7 @@ namespace ProductsService.Controllers
         }
 
         //Delete: api/product/DeleteProduct?id=95e87976-88e3-415d-b139-219538e948c1
+        [ApiKeyAuth]
         [HttpDelete]
         public ActionResult<Guid> DeleteProduct(Guid id)
         {
@@ -64,5 +67,13 @@ namespace ProductsService.Controllers
             else
                 return NotFound(id);
         }
+
+        [ApiKeyAuth]
+        [HttpGet]
+        public ActionResult<string> Secret()
+        {
+            return Ok("This is Secret!");
+        }
+
     }
 }
