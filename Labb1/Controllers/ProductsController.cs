@@ -11,13 +11,13 @@ namespace Labb1.Controllers
     [Route("[controller]/[action]")]
     public class ProductsController : Controller
     {
-        private readonly IProductRepository _productRepository;
+       
         private readonly ProductApiHandler _productapi;
         private readonly string _apiRootUrl;
 
-        public ProductsController(IProductRepository productRepository, ProductApiHandler productApiHandler, IConfiguration config )
+        public ProductsController(ProductApiHandler productApiHandler, IConfiguration config )
         {
-            this._productRepository = productRepository;
+            
             this._productapi = productApiHandler;
             _apiRootUrl = config.GetValue(typeof(string), "ProductApiRoot").ToString();
         }

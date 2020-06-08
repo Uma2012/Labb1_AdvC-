@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Labb1.Models;
+using Labb1.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,21 +16,25 @@ namespace Labb1.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly string _cartName;
-        private readonly IProductRepository _productRepository;        
+        private readonly ProductApiHandler _productApiHandler;
+        private readonly string _apiRootUrl;
 
-        public ShoppingCartController(IProductRepository productRepository,IConfiguration config )
+
+        public ShoppingCartController(IConfiguration config,ProductApiHandler productApiHandler )
         {
             this._cartName = config["CartSessionCookie:Name"];
-            this._productRepository = productRepository;           
+            this._productApiHandler = productApiHandler;
+            _apiRootUrl = config.GetValue(typeof(string), "ProductApiRoot").ToString();
+
         }
 
 
         //This mtd adds the product to session cookie.
-       
+
         [ValidateAntiForgeryToken]
         [Authorize]
         [HttpPost]
-        public IActionResult AddToCart(Guid productid)
+        public async Task<IActionResult> AddToCart(Guid productid)
         {
             //Read the session and get the content
             var currentCartItems = HttpContext.Session.Get<List<CartItem>>(_cartName);
@@ -51,7 +56,9 @@ namespace Labb1.Controllers
             //if the session doest contain the incoming productid, then create a new item with amount =1
             else
             {
-                var product = _productRepository.GetProductById(productid);
+               // var product = _productRepository.GetProductById(productid);
+                Products product = await _productApiHandler.GetOneAsync<Products>($"{_apiRootUrl}GetProductBy_Id?productid=" + productid);
+
                 CartItem newItem = new CartItem()
                 {
                     Product = product,

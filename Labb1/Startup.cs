@@ -65,9 +65,6 @@ namespace Labb1
 
             services.AddControllersWithViews();
 
-
-            services.AddSingleton<IProductRepository, MockProductRepository>();
-
            
             services.AddSession();
             services.AddRazorPages();
