@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Labb1.Models;
 using Labb1.Services;
 using Labb1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,7 @@ namespace Labb1.Controllers
             this._orderApiHandler = orderapiHandler;
             _apiRootUrl = config.GetValue(typeof(string), "OrderApiRoot").ToString();
         }
-
+        [Authorize]
         //Assigning values to Order object and calling OrderService to store the Order object
         [HttpPost]
         public async Task<IActionResult> CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
