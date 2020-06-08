@@ -60,10 +60,7 @@ namespace Labb1
             }
 
             return product;
-        }   
-
-        
-
-     
+        } 
+    
     }
 }

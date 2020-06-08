@@ -27,8 +27,9 @@ namespace Labb1.Controllers
             this._orderApiHandler = orderapiHandler;
             _apiRootUrl = config.GetValue(typeof(string), "OrderApiRoot").ToString();
         }
-        [Authorize]
+
         //Assigning values to Order object and calling OrderService to store the Order object
+        [Authorize]       
         [HttpPost]
         public async Task<IActionResult> CreateOrder([Bind("TotalPrice,productlist")] ShoppingCart form)
          {       
@@ -54,7 +55,6 @@ namespace Labb1.Controllers
 
                 //calling OrderSevice for storing the Order object
                 await _orderApiHandler.PostAsync<Order>(createorder, $"{_apiRootUrl}CreateOrder");
-                //await _orderApiHandler.PostAsync<Order>(createorder, "https://localhost:44383/api/order/CreateOrder");
             }
 
             //assigning totalitems to the order object

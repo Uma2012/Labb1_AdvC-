@@ -27,7 +27,6 @@ namespace Labb1.Controllers
         public async Task<ActionResult<List<Products>>> Index()
         {
 
-            // List<Products> allProducts = await _productapi.GetAllAsync<Products>("https://localhost:44310/api/product/GetAllProducts");
             List<Products> allProducts = await _productapi.GetAllAsync<Products>($"{_apiRootUrl}GetAllProducts");
             return View(allProducts);
            
@@ -38,7 +37,6 @@ namespace Labb1.Controllers
         public async Task<IActionResult> ProductDetails(Guid productid)
         {
             Products product = await _productapi.GetOneAsync<Products>($"{_apiRootUrl}GetProductBy_Id?productid=" + productid);
-            //Products product = await _productapi.GetOneAsync<Products>("https://localhost:44310/api/product/GetProductBy_Id?productid=" + productid);
             return View(product);
 
         }
