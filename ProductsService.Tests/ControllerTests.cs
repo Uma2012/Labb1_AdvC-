@@ -23,6 +23,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 var response = await client.GetAsync("api/product/GetAllProducts");
                 response.EnsureSuccessStatusCode();
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -34,6 +35,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 var response = await client.GetAsync("api/product/GetProductBy_Id?productid=" + Guid.Empty);               
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);               
             }
@@ -44,6 +46,7 @@ namespace ProductsService.Tests
         {
             using (var client = new TestClientProvider().Client)
             {
+                client.DefaultRequestHeaders.Add("Api_Key", "MySceretApiKey");
                 var productResponse = await client.GetAsync($"/api/product/GetProductBy_Id?productid={_fixture.product.id}");
 
                 using (var responseStream = await productResponse.Content.ReadAsStreamAsync())

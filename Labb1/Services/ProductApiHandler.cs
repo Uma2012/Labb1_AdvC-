@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,9 +11,12 @@ namespace Labb1.Services
     public class ProductApiHandler
     {
         private readonly IHttpClientFactory _clientFactory;
-        public ProductApiHandler(IHttpClientFactory clientFactory)
+        private readonly string _productApikey;
+
+        public ProductApiHandler(IHttpClientFactory clientFactory,IConfiguration config )
         {
             this._clientFactory = clientFactory;
+            this._productApikey = config.GetValue<string>("ApiKeys:ProductApiKey");
         }
         public async Task<List<T>> GetAllAsync<T>(string webApipath)
         {
@@ -22,6 +26,7 @@ namespace Labb1.Services
 
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "Labb1");
+            request.Headers.Add("Api_Key", _productApikey);
 
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
@@ -43,6 +48,7 @@ namespace Labb1.Services
 
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("User-Agent", "Labb1");
+            request.Headers.Add("Api_Key", _productApikey);
 
             var response = await client.SendAsync(request);
            

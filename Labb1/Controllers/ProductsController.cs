@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Labb1.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -23,6 +24,7 @@ namespace Labb1.Controllers
         }
 
         //Calls the ProductService to return all products
+        [Authorize]
         [HttpGet]       
         public async Task<ActionResult<List<Products>>> Index()
         {
@@ -33,6 +35,7 @@ namespace Labb1.Controllers
         }
 
         //This mtd calls ProductService to return  Product based on its id
+        [Authorize]
         [HttpGet("productid")]
         public async Task<IActionResult> ProductDetails(Guid productid)
         {

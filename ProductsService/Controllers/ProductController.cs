@@ -22,6 +22,7 @@ namespace ProductsService.Controllers
         }
 
         // GET: api/Product/GetAllProducts
+        [ApiKeyAuth]        
         [HttpGet]     
         public ActionResult<List<Product>> GetAllProducts()
         {
@@ -29,7 +30,9 @@ namespace ProductsService.Controllers
             return Ok(products);
         }
 
+
         // GET: api/Product/GetProductBy_Id?productid=95e87976-88e3-415d-b139-219538e948c1
+        [ApiKeyAuth]
         [HttpGet]
         public ActionResult<Product> GetProductBy_Id(Guid productid)
         {
